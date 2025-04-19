@@ -1,0 +1,3 @@
+/home/alex/SoftwarePortfolie/build/CMakeFiles/HeroGame.dir
+/home/alex/SoftwarePortfolie/build/CMakeFiles/edit_cache.dir
+/home/alex/SoftwarePortfolie/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/HeroGame.dir/src/main.cpp.o -o HeroGame 
