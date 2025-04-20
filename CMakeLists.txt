@@ -3,5 +3,12 @@ project(HeroGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(HeroGame src/main.cpp)
+include_directories(include)
+
+add_executable(HeroGame
+    src/main.cpp
+    src/Karakter.cpp
+    src/Hero.cpp
+    src/Fjende.cpp
+)
 

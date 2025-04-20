@@ -129,6 +129,78 @@ HeroGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/build
 .PHONY : HeroGame/fast
 
+src/Fjende.o: src/Fjende.cpp.o
+.PHONY : src/Fjende.o
+
+# target to build an object file
+src/Fjende.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Fjende.cpp.o
+.PHONY : src/Fjende.cpp.o
+
+src/Fjende.i: src/Fjende.cpp.i
+.PHONY : src/Fjende.i
+
+# target to preprocess a source file
+src/Fjende.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Fjende.cpp.i
+.PHONY : src/Fjende.cpp.i
+
+src/Fjende.s: src/Fjende.cpp.s
+.PHONY : src/Fjende.s
+
+# target to generate assembly for a file
+src/Fjende.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Fjende.cpp.s
+.PHONY : src/Fjende.cpp.s
+
+src/Hero.o: src/Hero.cpp.o
+.PHONY : src/Hero.o
+
+# target to build an object file
+src/Hero.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.o
+.PHONY : src/Hero.cpp.o
+
+src/Hero.i: src/Hero.cpp.i
+.PHONY : src/Hero.i
+
+# target to preprocess a source file
+src/Hero.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.i
+.PHONY : src/Hero.cpp.i
+
+src/Hero.s: src/Hero.cpp.s
+.PHONY : src/Hero.s
+
+# target to generate assembly for a file
+src/Hero.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.s
+.PHONY : src/Hero.cpp.s
+
+src/Karakter.o: src/Karakter.cpp.o
+.PHONY : src/Karakter.o
+
+# target to build an object file
+src/Karakter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Karakter.cpp.o
+.PHONY : src/Karakter.cpp.o
+
+src/Karakter.i: src/Karakter.cpp.i
+.PHONY : src/Karakter.i
+
+# target to preprocess a source file
+src/Karakter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Karakter.cpp.i
+.PHONY : src/Karakter.cpp.i
+
+src/Karakter.s: src/Karakter.cpp.s
+.PHONY : src/Karakter.s
+
+# target to generate assembly for a file
+src/Karakter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Karakter.cpp.s
+.PHONY : src/Karakter.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +234,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HeroGame"
+	@echo "... src/Fjende.o"
+	@echo "... src/Fjende.i"
+	@echo "... src/Fjende.s"
+	@echo "... src/Hero.o"
+	@echo "... src/Hero.i"
+	@echo "... src/Hero.s"
+	@echo "... src/Karakter.o"
+	@echo "... src/Karakter.i"
+	@echo "... src/Karakter.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
