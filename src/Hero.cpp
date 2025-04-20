@@ -1,18 +1,14 @@
 #include "Hero.h"
 
-using namespace std;
-
 Hero::Hero(string navn)
-    : navn(navn), level(1), hp(10), xp(0), styrke(2) {}
+    : Karakter(navn, 10, 2), xp(0), level(1) {}
 
-string Hero::hentNavn() const { return navn; }
-int Hero::hentLevel() const { return level; }
-int Hero::hentHP() const { return hp; }
-int Hero::hentXP() const { return xp; }
-int Hero::hentStyrke() const { return styrke; }
+int Hero::hentLevel() const {
+    return level;
+}
 
-void Hero::tagSkade(int mængde) {
-    hp -= mængde;
+int Hero::hentXP() const {
+    return xp;
 }
 
 void Hero::givXP(int mængde) {
@@ -29,8 +25,4 @@ bool Hero::levelOp() {
         return true;
     }
     return false;
-}
-
-bool Hero::erILive() const {
-    return hp > 0;
 }
