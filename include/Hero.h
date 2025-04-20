@@ -1,34 +1,23 @@
 #ifndef HERO_H
 #define HERO_H
 
-#include <string>
+#include "Karakter.h"
 
 using namespace std;
 
-class Hero {
-public:
-    Hero();
-    Hero(string navn);
-    
-    string hentNavn() const;
-    int hentLevel() const;
-    int hentHP() const;
-    int hentXP() const;
-    int hentStyrke() const;
+class Hero : public Karakter {
+private:
+    int xp;
+    int level;
 
-    void tagSkade(int mængde);
+public:
+    Hero(string navn);
+
+    int hentLevel() const;
+    int hentXP() const;
+
     void givXP(int mængde);
     bool levelOp();
-    bool erILive() const;
-
-    ~Hero();
-    
-protected:
-    string navn;
-    int level;
-    int hp;
-    int xp;
-    int styrke;
 };
 
 #endif

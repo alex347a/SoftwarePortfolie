@@ -6,12 +6,8 @@
 using namespace std;
 
 class Karakter {
-protected:
-    string navn;
-    int hp;
-    int styrke;
-
 public:
+    Karakter();
     Karakter(string navn, int hp, int styrke);
     
     string hentNavn() const;
@@ -22,6 +18,12 @@ public:
     bool erILive() const;
 
     virtual ~Karakter() = default; // Arv
+
+protected:
+    string navn;
+    int hp;
+    int styrke;
+
 };
 
 #endif
