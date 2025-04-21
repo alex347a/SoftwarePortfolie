@@ -1,6 +1,10 @@
 #include "GameManager.h"
 #include <iostream>
 
+#include <string>
+#include <limits>
+#include <sstream>
+
 using namespace std;
 
 GameManager::GameManager() {
@@ -23,7 +27,8 @@ void GameManager::visHovedmenu() {
         cout << "2. Vælg eksisterende helt\n";
         cout << "3. Afslut\n";
         cout << "Valg: ";
-        cin >> valg;
+        
+        valg = hentGyldigtTal(1, 3);
 
         switch (valg) {
             case 1:
@@ -44,17 +49,49 @@ void GameManager::visHovedmenu() {
     } while (valg != 3);
 }
 
+bool GameManager::erKunWhitespaces(const string& tekst) {
+    for (char c : tekst) {
+        if (!isspace(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 void GameManager::nyHero() {
     string navn;
-    cout << "Indtast navn på ny helt: ";
-    cin >> navn;
-    if (navn.empty() || navn == " " || navn == "\n" || navn == predefineredeHelte[0].hentNavn() || navn == predefineredeHelte[1].hentNavn() || navn == predefineredeHelte[2].hentNavn()) {
-        cout << "Navn må hverken være tomt eller allerede eksisterende. Vender tilbage til hovedmenu.\n";
-        return;
+    bool gyldigtNavn = false;
+
+    while (!gyldigtNavn) {
+        cout << "Indtast navn på ny helt: ";
+        getline(cin, navn);
+
+        if (erKunWhitespaces(navn)) {
+            cout << "Navn må ikke være tomt eller kun bestå af mellemrum.\n";
+            continue;
+        }
+
+        bool eksistererAllerede = false;
+        for (size_t i = 0; i < predefineredeHelte.size(); ++i) {
+        const Hero& h = predefineredeHelte[i];
+        if (navn == h.hentNavn()) {
+                eksistererAllerede = true;
+                break;
+            }
+        }
+
+        if (eksistererAllerede) {
+            cout << "Navnet findes allerede. Prøv et andet.\n";
+        } else {
+            gyldigtNavn = true;
+        }
     }
+
     aktivHero = new Hero(navn);
     cout << "Ny helt oprettet: " << aktivHero->hentNavn() << endl;
 }
+
 
 void GameManager::loadHero() {
     cout << "--- Vælg en eksisterende helt ---\n";
@@ -62,15 +99,13 @@ void GameManager::loadHero() {
         cout << i + 1 << ". " << predefineredeHelte[i].hentNavn() << endl;
     }
 
-    int valg;
-    cin >> valg;
-    if (valg >= 1 && valg <= (int)predefineredeHelte.size()) {
-        aktivHero = new Hero(predefineredeHelte[valg - 1]);
-        cout << "Helt valgt: " << aktivHero->hentNavn() << endl;
-    } else {
-        cout << "Ugyldigt valg. Går tilbage til hovedmenu.\n";
-    }
+    cout << "Valg: ";
+    int valg = hentGyldigtTal(1, predefineredeHelte.size());
+
+    aktivHero = new Hero(predefineredeHelte[valg - 1]);
+    cout << "Helt valgt: " << aktivHero->hentNavn() << endl;
 }
+
 
 void GameManager::eventyrMenu() {
     int valg;
@@ -80,7 +115,8 @@ void GameManager::eventyrMenu() {
         cout << "1. Kæmp mod en fjende\n";
         cout << "2. Tilbage til hovedmenu\n";
         cout << "Valg: ";
-        cin >> valg;
+        
+        valg = hentGyldigtTal(1, 2);
 
         switch (valg) {
             case 1:
@@ -94,6 +130,25 @@ void GameManager::eventyrMenu() {
         }
 
     } while (valg != 2 && aktivHero->erILive());
+}
+
+// Hjælpefunktion til at sørge for gyldigt input af brugeren
+int GameManager::hentGyldigtTal(int min, int max) {
+    int valg;
+    string input;
+
+    while (true) {
+        getline(cin, input);
+        stringstream ss(input);
+
+        if (ss >> valg && !(ss >> input)) { // sikrer hele input er et heltal
+            if (valg >= min && valg <= max) {
+                return valg;
+            }
+        }
+
+        cout << "Indtast venligst et tal mellem " << min << " og " << max << ": ";
+    }
 }
 
 void GameManager::kæmpModFjende() {
@@ -153,13 +208,8 @@ Fjende GameManager::vælgFjende() {
     cout << "--- Vælg en fjende ---\n";
     visFjender();
     int valg;
-    cin >> valg;
-    if (valg >= 1 && valg <= (int)fjendeliste.size()) {
-        return fjendeliste[valg - 1];
-    } else {
-        cout << "Ugyldigt valg. Prøv igen.\n";
-        return vælgFjende();
-    }
+    valg = hentGyldigtTal(1, fjendeliste.size());
+    return fjendeliste[valg - 1];
 }
 
 void GameManager::opretFjender() {

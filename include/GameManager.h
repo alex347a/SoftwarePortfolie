@@ -21,6 +21,10 @@ protected:
     void loadHero();
     void eventyrMenu();
 
+    int hentGyldigtTal(int min, int max);
+    bool erKunWhitespaces(const string& tekst);
+
+
     void kæmpModFjende();
     void visFjender() const;
     Fjende vælgFjende();
