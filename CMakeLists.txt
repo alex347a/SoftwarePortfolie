@@ -10,5 +10,6 @@ add_executable(HeroGame
     src/Karakter.cpp
     src/Hero.cpp
     src/Fjende.cpp
+    src/GameManager.cpp
 )
 

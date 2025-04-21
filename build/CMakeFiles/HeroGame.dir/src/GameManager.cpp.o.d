@@ -1,5 +1,6 @@
-CMakeFiles/HeroGame.dir/src/main.cpp.o: \
- /home/alex/SoftwarePortfolie/src/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/HeroGame.dir/src/GameManager.cpp.o: \
+ /home/alex/SoftwarePortfolie/src/GameManager.cpp \
+ /usr/include/stdc-predef.h \
  /home/alex/SoftwarePortfolie/include/GameManager.h \
  /home/alex/SoftwarePortfolie/include/Hero.h \
  /home/alex/SoftwarePortfolie/include/Karakter.h \

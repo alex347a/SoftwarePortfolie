@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/HeroGame.dir/src/main.cpp.o CMakeFiles/HeroGame.dir/src/Karakter.cpp.o CMakeFiles/HeroGame.dir/src/Hero.cpp.o CMakeFiles/HeroGame.dir/src/Fjende.cpp.o -o HeroGame 
+/usr/bin/c++ CMakeFiles/HeroGame.dir/src/main.cpp.o CMakeFiles/HeroGame.dir/src/Karakter.cpp.o CMakeFiles/HeroGame.dir/src/Hero.cpp.o CMakeFiles/HeroGame.dir/src/Fjende.cpp.o CMakeFiles/HeroGame.dir/src/GameManager.cpp.o -o HeroGame 

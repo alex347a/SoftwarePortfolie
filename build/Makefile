@@ -153,6 +153,30 @@ src/Fjende.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Fjende.cpp.s
 .PHONY : src/Fjende.cpp.s
 
+src/GameManager.o: src/GameManager.cpp.o
+.PHONY : src/GameManager.o
+
+# target to build an object file
+src/GameManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GameManager.cpp.o
+.PHONY : src/GameManager.cpp.o
+
+src/GameManager.i: src/GameManager.cpp.i
+.PHONY : src/GameManager.i
+
+# target to preprocess a source file
+src/GameManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GameManager.cpp.i
+.PHONY : src/GameManager.cpp.i
+
+src/GameManager.s: src/GameManager.cpp.s
+.PHONY : src/GameManager.s
+
+# target to generate assembly for a file
+src/GameManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GameManager.cpp.s
+.PHONY : src/GameManager.cpp.s
+
 src/Hero.o: src/Hero.cpp.o
 .PHONY : src/Hero.o
 
@@ -237,6 +261,9 @@ help:
 	@echo "... src/Fjende.o"
 	@echo "... src/Fjende.i"
 	@echo "... src/Fjende.s"
+	@echo "... src/GameManager.o"
+	@echo "... src/GameManager.i"
+	@echo "... src/GameManager.s"
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
