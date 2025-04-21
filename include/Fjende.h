@@ -10,7 +10,7 @@ private:
     int xpGevinst;
 
 public:
-    Fjende(string navn, int hp, int styrke, int xpGevinst);
+    Fjende(string navn, int maxHP, int hp, int styrke, int xpGevinst);
 
     int hentXPGevinst() const;
 };

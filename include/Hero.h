@@ -6,18 +6,19 @@
 using namespace std;
 
 class Hero : public Karakter {
-private:
-    int xp;
-    int level;
-
 public:
     Hero(string navn);
 
     int hentLevel() const;
     int hentXP() const;
 
+    void givFuldHP();
     void givXP(int mængde);
     bool levelOp();
+
+protected:
+    int xp;
+    int level;
 };
 
 #endif

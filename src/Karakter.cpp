@@ -2,10 +2,11 @@
 
 using namespace std;
 
-Karakter::Karakter(string navn, int hp, int styrke)
-    : navn(navn), hp(hp), styrke(styrke) {}
+Karakter::Karakter(string navn, int maxHP, int hp, int styrke)
+    : navn(navn), maxHP(maxHP), hp(hp), styrke(styrke) {}
 
 string Karakter::hentNavn() const { return navn; }
+int Karakter::hentMaxHP() const { return maxHP; }
 int Karakter::hentHP() const { return hp; }
 int Karakter::hentStyrke() const { return styrke; }
 

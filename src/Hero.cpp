@@ -1,7 +1,7 @@
 #include "Hero.h"
 
 Hero::Hero(string navn)
-    : Karakter(navn, 10, 2), xp(0), level(1) {}
+    : Karakter(navn, 10, 10, 2), xp(0), level(1) {}
 
 int Hero::hentLevel() const {
     return level;
@@ -9,6 +9,10 @@ int Hero::hentLevel() const {
 
 int Hero::hentXP() const {
     return xp;
+}
+
+void Hero::givFuldHP() {
+    hp = maxHP;
 }
 
 void Hero::givXP(int mængde) {
@@ -20,7 +24,7 @@ bool Hero::levelOp() {
     if (xp >= levelGrænse) {
         xp -= levelGrænse;
         level++;
-        hp += 2;
+        maxHP += 2;
         styrke += 1;
         return true;
     }

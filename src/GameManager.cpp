@@ -108,10 +108,18 @@ void GameManager::kæmpModFjende() {
     }
 
     if (aktivHero->erILive()) {
+        cout << aktivHero->hentHP() << " HP tilbage.\n";
+        aktivHero->givFuldHP();
+        cout << aktivHero->hentHP() << " HP efter at have fået fuld HP.\n";
         cout << aktivHero->hentNavn() << " vandt og får " << fjende.hentXPGevinst() << " XP!\n";
         aktivHero->givXP(fjende.hentXPGevinst());
         if (aktivHero->levelOp()) {
+            aktivHero->givFuldHP();
             cout << "Du er steget i level!\n";
+            cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
+            cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
+            cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
+            
         }
     } else {
         cout << aktivHero->hentNavn() << " døde i kampen...\n";
@@ -121,7 +129,7 @@ void GameManager::kæmpModFjende() {
 void GameManager::visFjender() const {
     for (size_t i = 0; i < fjendeliste.size(); ++i) {
         cout << i + 1 << ". " << fjendeliste[i].hentNavn() << " (HP: "
-             << fjendeliste[i].hentHP() << ", Styrke: "
+             << fjendeliste[i].hentMaxHP() << ", Styrke: "
              << fjendeliste[i].hentStyrke() << ")\n";
     }
 }
@@ -140,15 +148,15 @@ Fjende GameManager::vælgFjende() {
 }
 
 void GameManager::opretFjender() {
-    fjendeliste.push_back(Fjende("Wolf Cub", 4, 1, 100));
-    fjendeliste.push_back(Fjende("Young Forest Wolf", 4, 2, 200));
-    fjendeliste.push_back(Fjende("Feronius the Ferocious", 8, 3, 400));
-    fjendeliste.push_back(Fjende("Beach Crawler", 10, 4, 500));
-    fjendeliste.push_back(Fjende("Young Crocolisk", 15, 5, 800));
-    fjendeliste.push_back(Fjende("Mother Crocolisk", 30, 5, 1000));
-    fjendeliste.push_back(Fjende("Kobold Miner", 15, 10, 1500));
-    fjendeliste.push_back(Fjende("Fagnus the Mage", 11, 20, 2000));
-    fjendeliste.push_back(Fjende("Dragon", 100, 10, 3000));
+    fjendeliste.push_back(Fjende("Wolf Cub", 4, 4, 1, 100));
+    fjendeliste.push_back(Fjende("Young Forest Wolf", 4, 4, 2, 200));
+    fjendeliste.push_back(Fjende("Feronius the Ferocious", 8, 8, 3, 400));
+    fjendeliste.push_back(Fjende("Beach Crawler", 10, 10, 4, 500));
+    fjendeliste.push_back(Fjende("Young Crocolisk", 15, 15, 5, 800));
+    fjendeliste.push_back(Fjende("Mother Crocolisk", 30, 30, 5, 1000));
+    fjendeliste.push_back(Fjende("Kobold Miner", 15, 15, 10, 1500));
+    fjendeliste.push_back(Fjende("Fagnus the Mage", 11, 11, 20, 2000));
+    fjendeliste.push_back(Fjende("Dragon", 100, 100, 10, 3000));
 }
 
 void GameManager::opretPredefineredeHelte() {

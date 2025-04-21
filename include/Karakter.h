@@ -8,9 +8,10 @@ using namespace std;
 class Karakter {
 public:
     Karakter();
-    Karakter(string navn, int hp, int styrke);
+    Karakter(string navn, int maxHP, int hp, int styrke);
     
     string hentNavn() const;
+    int hentMaxHP() const;
     int hentHP() const;
     int hentStyrke() const;
 
@@ -21,6 +22,7 @@ public:
 
 protected:
     string navn;
+    int maxHP;
     int hp;
     int styrke;
 
