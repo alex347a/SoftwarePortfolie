@@ -98,19 +98,32 @@ void GameManager::eventyrMenu() {
 
 void GameManager::kæmpModFjende() {
     Fjende fjende = vælgFjende();
+    cout << "--- KAMP ---\n";
     cout << aktivHero->hentNavn() << " kæmper mod " << fjende.hentNavn() << "!\n";
 
     while (aktivHero->erILive() && fjende.erILive()) {
+        cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
         fjende.tagSkade(aktivHero->hentStyrke());
-        if (fjende.erILive()) {
-            aktivHero->tagSkade(fjende.hentStyrke());
+
+        if (!fjende.erILive()) {
+            break;
         }
+
+        cout << fjende.hentNavn() << " har " << fjende.hentHP() << " HP tilbage.\n";
+        cout << fjende.hentNavn() << " rammer " << aktivHero->hentNavn() << " for " << fjende.hentStyrke() << " skade!\n";
+
+        aktivHero->tagSkade(fjende.hentStyrke());
+
+        if (!aktivHero->erILive()) {
+            break;
+        }
+
+        cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n";
+        
     }
 
     if (aktivHero->erILive()) {
-        cout << aktivHero->hentHP() << " HP tilbage.\n";
         aktivHero->givFuldHP();
-        cout << aktivHero->hentHP() << " HP efter at have fået fuld HP.\n";
         cout << aktivHero->hentNavn() << " vandt og får " << fjende.hentXPGevinst() << " XP!\n";
         aktivHero->givXP(fjende.hentXPGevinst());
         if (aktivHero->levelOp()) {
@@ -121,6 +134,8 @@ void GameManager::kæmpModFjende() {
             cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
             
         }
+        cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
+
     } else {
         cout << aktivHero->hentNavn() << " døde i kampen...\n";
     }
