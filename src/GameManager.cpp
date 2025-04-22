@@ -154,11 +154,34 @@ int GameManager::hentGyldigtTal(int min, int max) {
 void GameManager::kæmpModFjende() {
     Fjende fjende = vælgFjende();
     cout << "--- KAMP ---\n";
-    cout << aktivHero->hentNavn() << " kæmper mod " << fjende.hentNavn() << "!\n";
+    cout << aktivHero->hentNavn() << " kæmper mod " << fjende.hentNavn() << "!\n\n";
+    
+    cout << aktivHero->hentNavn() << " har\n" 
+    << "HP: " << aktivHero->hentHP() << "\n"
+    << "styrke: "<<aktivHero->hentStyrke() << "\n\n";
 
+    cout << fjende.hentNavn() << " har\n" 
+    << "HP: " << fjende.hentHP() << "\n"
+    << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    
     while (aktivHero->erILive() && fjende.erILive()) {
-        cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
-        fjende.tagSkade(aktivHero->hentStyrke());
+        cout << "Tryk på ENTER for at angribe!\n";
+
+        string input;
+        getline(cin, input);
+        if (input.empty()) {
+            cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
+            fjende.tagSkade(aktivHero->hentStyrke());
+        } else {
+            cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
+        }
+
+        if (fjende.hentNavn() == "Dragon" && !fjende.erILive()) {
+            cout << "Du besejrede dragen! Du har vundet spillet!\n";
+            cout << "Tillykke, " << aktivHero->hentNavn() << "!\n";
+            cout << "Forlader spillet...\n";
+            exit(0);
+        }
 
         if (!fjende.erILive()) {
             break;
@@ -173,7 +196,7 @@ void GameManager::kæmpModFjende() {
             break;
         }
 
-        cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n";
+        cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n\n";
         
     }
 
