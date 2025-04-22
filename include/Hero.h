@@ -8,6 +8,7 @@ using namespace std;
 class Hero : public Karakter {
 public:
     Hero(string navn);
+    Hero(string navn, int maxHP, int hp, int styrke, int xp, int level);
 
     int hentLevel() const;
     int hentXP() const;

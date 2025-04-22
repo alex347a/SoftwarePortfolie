@@ -96,7 +96,11 @@ void GameManager::nyHero() {
 void GameManager::loadHero() {
     cout << "--- Vælg en eksisterende helt ---\n";
     for (size_t i = 0; i < predefineredeHelte.size(); ++i) {
-        cout << i + 1 << ". " << predefineredeHelte[i].hentNavn() << endl;
+        cout << i + 1 << ". " << predefineredeHelte[i].hentNavn() 
+        << " HP: " << predefineredeHelte[i].hentMaxHP() 
+        << ", Styrke: " << predefineredeHelte[i].hentStyrke() 
+        << ", Level: " << predefineredeHelte[i].hentLevel()
+        << endl;
     }
 
     cout << "Valg: ";
@@ -187,7 +191,7 @@ void GameManager::kæmpModFjende() {
             break;
         }
 
-        cout << fjende.hentNavn() << " har " << fjende.hentHP() << " HP tilbage.\n";
+        cout << fjende.hentNavn() << " har " << fjende.hentHP() << " HP tilbage.\n\n";
         cout << fjende.hentNavn() << " rammer " << aktivHero->hentNavn() << " for " << fjende.hentStyrke() << " skade!\n";
 
         aktivHero->tagSkade(fjende.hentStyrke());
@@ -202,8 +206,15 @@ void GameManager::kæmpModFjende() {
 
     if (aktivHero->erILive()) {
         aktivHero->givFuldHP();
-        cout << aktivHero->hentNavn() << " vandt og får " << fjende.hentXPGevinst() << " XP!\n";
-        aktivHero->givXP(fjende.hentXPGevinst());
+        // Murloc får double XP
+        if (aktivHero->hentNavn() == "Murloc") {
+            cout << aktivHero->hentNavn() << " vandt og får double XP! " << aktivHero->hentNavn() << " får derfor " << fjende.hentXPGevinst()*2 << " XP!\n";
+            aktivHero->givXP(fjende.hentXPGevinst()*2);
+        } else {
+            cout << aktivHero->hentNavn() << " vandt og får " << fjende.hentXPGevinst() << " XP!\n";
+            aktivHero->givXP(fjende.hentXPGevinst());
+        }
+        
         if (aktivHero->levelOp()) {
             aktivHero->givFuldHP();
             cout << "Du er steget i level!\n";
@@ -248,9 +259,10 @@ void GameManager::opretFjender() {
 }
 
 void GameManager::opretPredefineredeHelte() {
-    predefineredeHelte.push_back(Hero("Thor"));
-    predefineredeHelte.push_back(Hero("Loke"));
-    predefineredeHelte.push_back(Hero("Odin"));
+    predefineredeHelte.push_back(Hero("Murloc", 4, 4, 1, 0, 1));
+    predefineredeHelte.push_back(Hero("Thor", 14, 14, 4, 0, 4));
+    predefineredeHelte.push_back(Hero("Loke", 8, 8, 6, 0, 3));
+    predefineredeHelte.push_back(Hero("Odin", 18, 18, 3, 0, 5));
 }
 
 GameManager::~GameManager() {
