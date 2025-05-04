@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GROTTE_H
+#define GROTTE_H
+
 #include <string>
 #include <vector>
 #include "Fjende.h"
@@ -21,3 +23,5 @@ protected:
     int guld;
     vector<Fjende> fjender;
 };
+
+#endif
