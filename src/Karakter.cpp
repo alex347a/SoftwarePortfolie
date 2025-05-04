@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Karakter::Karakter() {}
+
 Karakter::Karakter(string navn, int maxHP, int hp, int styrke)
     : navn(navn), maxHP(maxHP), hp(hp), styrke(styrke) {}
 

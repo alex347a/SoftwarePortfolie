@@ -7,6 +7,7 @@ using namespace std;
 
 class Hero : public Karakter {
 public:
+    Hero();
     Hero(string navn);
     Hero(string navn, int maxHP, int hp, int styrke, int xp, int level);
 
@@ -16,6 +17,8 @@ public:
     void givFuldHP();
     void givXP(int mængde);
     bool levelOp();
+
+    ~Hero();
 
 protected:
     int xp;

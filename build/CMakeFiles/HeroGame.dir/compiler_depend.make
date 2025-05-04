@@ -368,7 +368,6 @@ CMakeFiles/HeroGame.dir/src/GameManager.cpp.o: ../src/GameManager.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
-  /usr/include/c++/11/limits \
   /usr/include/c++/11/sstream \
   /usr/include/c++/11/bits/sstream.tcc
 
@@ -897,8 +896,6 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: ../src/main.cpp \
 ../src/main.cpp:
 
 /usr/include/c++/11/sstream:
-
-/usr/include/c++/11/limits:
 
 /usr/include/c++/11/bits/istream.tcc:
 

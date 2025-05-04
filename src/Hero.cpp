@@ -1,5 +1,7 @@
 #include "Hero.h"
 
+Hero::Hero() {}
+
 // Constructor til Hero med custom navn
 Hero::Hero(string navn)
     : Karakter(navn, 10, 10, 2), xp(0), level(1) {}
@@ -35,3 +37,5 @@ bool Hero::levelOp() {
     }
     return false;
 }
+
+Hero::~Hero() {}
