@@ -11,20 +11,18 @@ vector<Grotte> GrotteGenerator::genererGrotter(int helteLevel, int antal) {
         int fjendeAntal = bestemAntalFjender(helteLevel);
         vector<Fjende> fjender = fjendeFactory->skabFjender(helteLevel, fjendeAntal);
 
-        string navn = lavGrotteNavn(i);
+        string grotteNavn = lavGrotteNavn();
         int guld = beregnGuld(helteLevel, fjendeAntal);
 
-        grotter.push_back(Grotte(navn, guld, fjender));
+        grotter.push_back(Grotte(grotteNavn, guld, fjender));
     }
 
     return grotter;
 }
 
-string GrotteGenerator::lavGrotteNavn(int index) {
-    vector<string> navne = {
-        "Wolf Den", "Crocolisk Nest", "Ancient Mine", "Dark Forest", "Eye of Sauron"
-    };
-    return navne[index % navne.size()];
+string GrotteGenerator::lavGrotteNavn() {
+    string grotteNavn = "Mysterious Cave";
+    return grotteNavn;
 }
 
 int GrotteGenerator::bestemAntalFjender(int helteLevel) {
@@ -34,6 +32,7 @@ int GrotteGenerator::bestemAntalFjender(int helteLevel) {
     else return rand() % 3 + 3;                         // 3–5 fjender
 }
 
+// Lav beregningen af guld om. Den skal være baseret på den totale mængde af xp der gives for alle fjenderne i grotten.
 int GrotteGenerator::beregnGuld(int helteLevel, int fjendeAntal) {
     return (helteLevel * 10) + (fjendeAntal * 20);
 }

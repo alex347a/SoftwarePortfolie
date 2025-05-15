@@ -1,32 +1,33 @@
 #include "StandardFjendeFactory.h"
 
-StandardFjendeFactory::StandardFjendeFactory() {
-    baseNavne = {"Wolf", "Crawler", "Crocolisk", "Miner", "Mage"};
-    styrkeModifiers = {"Weak", "Average", "Strong", "Elite"};
-}
+StandardFjendeFactory::StandardFjendeFactory(const vector<Fjende>& fjender) 
+    : fjendeListe(fjender) {}
 
 Fjende StandardFjendeFactory::skabFjende(int helteLevel) {
     string modifier;
     vector<string> passendeNavne;
 
+    // Vælg en passende modifier baseret på helteLevel
     if (helteLevel <= 2) {
         modifier = "Weak";
-        passendeNavne = {baseNavne[0], baseNavne[1]};
-    }
-    else if (helteLevel <= 5) {
+    } else if (helteLevel <= 5) {
         modifier = "Average";
-        passendeNavne = {baseNavne[1], baseNavne[2]};
-    } else if (helteLevel <= 8) {
+    } else if (helteLevel <= 10) {
         modifier = "Strong";
-        passendeNavne = {baseNavne[2], baseNavne[3]};
     } else {
         modifier = "Elite";
-        passendeNavne = {baseNavne[3], baseNavne[4]};
     }
 
-    // Vælg tilfældigt fra de passende navne
-    string base = passendeNavne[rand() % passendeNavne.size()];
-    return lavFjendeMedModifier(base, modifier, helteLevel);
+    int minXP = helteLevel * 100;
+    int maxXP = helteLevel * 300;
+
+    // Find passende fjende navne baseret på helteLevel
+    for (const Fjende& f : fjendeListe) {
+        if (f.hentXPGevinst() >= minXP && f.hentXPGevinst() <= maxXP) {
+            passendeNavne.push_back(f.hentNavn());
+        }
+    }
+    return lavFjendeMedModifier(passendeNavne[rand() % passendeNavne.size()], modifier);
 }
 
 vector<Fjende> StandardFjendeFactory::skabFjender(int helteLevel, int antal) {
@@ -37,31 +38,47 @@ vector<Fjende> StandardFjendeFactory::skabFjender(int helteLevel, int antal) {
     return fjender;
 }
 
-Fjende StandardFjendeFactory::lavFjendeMedModifier(const string& baseNavn, const string& modifier, int helteLevel) {
-    string navn = modifier + " " + baseNavn;
+Fjende StandardFjendeFactory::lavFjendeMedModifier(const string& fjendeNavn, const string& modifier) {
+    string fjendeNavnMedModifier = modifier + " " + fjendeNavn;
 
-    int maxHP = 10 + helteLevel * 2;
+    int maxHP;
     int hp = maxHP;
-    int styrke = 3 + helteLevel;
-    int xp = 5 + helteLevel;
+    int styrke;
+    int xp;
 
-    if (modifier == "Weak") {
-        hp *= 0.8;
-        styrke *= 0.8;
-        xp *= 1.0;
-    } else if (modifier == "Average") {
-        hp *= 1.0;
-        styrke *= 1.0;
-        xp *= 1.2;
-    } else if (modifier == "Strong") {
-        hp *= 1.2;
-        styrke *= 1.2;
-        xp *= 1.5;
-    } else if (modifier == "Elite") {
-        hp *= 1.5;
-        styrke *= 1.5;
-        xp *= 2;
+    // Loop igennem fjendeListe for at finde den rigtige fjende
+    for (const Fjende& f : fjendeListe) {
+        if (f.hentNavn() == fjendeNavn) {
+            maxHP = f.hentMaxHP();
+            styrke = f.hentStyrke();
+            xp = f.hentXPGevinst();
+
+            if (modifier == "Weak") {
+                maxHP *= 0.75;
+                styrke *= 0.75;
+                xp *= 1;
+            } else if (modifier == "Average") {
+                maxHP *= 1;
+                styrke *= 1;
+                xp *= 1.2;
+            } else if (modifier == "Strong") {
+                maxHP *= 1.5;
+                styrke *= 1.5;
+                xp *= 1.8;
+            } else if (modifier == "Elite") {
+                maxHP *= 2;
+                styrke *= 2;
+                xp *= 2.5;
+            }
+            if (styrke < 1){
+                styrke = 1;
+            }
+            hp = maxHP;
+            break;
+        }
     }
 
-    return Fjende(navn, maxHP, hp, styrke, xp);
+    return Fjende(fjendeNavnMedModifier, maxHP, hp, styrke, xp);
 }
+
+StandardFjendeFactory::~StandardFjendeFactory() {}

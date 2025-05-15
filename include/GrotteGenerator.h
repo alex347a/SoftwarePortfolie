@@ -17,7 +17,7 @@ public:
 private:
     FjendeFactory* fjendeFactory;
 
-    string lavGrotteNavn(int index);
+    string lavGrotteNavn();
     int bestemAntalFjender(int helteLevel);
     int beregnGuld(int helteLevel, int antalFjender);
 };

@@ -11,5 +11,8 @@ add_executable(HeroGame
     src/Hero.cpp
     src/Fjende.cpp
     src/GameManager.cpp
+    src/Grotte.cpp
+    src/StandardFjendeFactory.cpp
+    src/GrotteGenerator.cpp
 )
 

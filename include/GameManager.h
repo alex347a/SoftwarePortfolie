@@ -3,6 +3,8 @@
 
 #include "Hero.h"
 #include "Fjende.h"
+#include "Grotte.h"
+#include "GrotteGenerator.h"
 
 #include <vector>
 #include <memory>
@@ -24,13 +26,18 @@ protected:
     int hentGyldigtTal(int min, int max);
     bool erKunWhitespaces(const string& tekst);
 
-
     void kæmpModFjende();
+    void kæmpModFjendeIGrotte(const Fjende& fjende);
     void visFjender() const;
     Fjende vælgFjende();
+    void opretGrotter();
+    void vælgOgGennemførGrotte();
 
-    vector<Fjende> fjendeliste;
+    vector<Fjende> fjendeListe;
     vector<Hero> predefineredeHelte;
+
+    vector<Grotte> grotterne;
+    GrotteGenerator* grottegren;
     
     Hero* aktivHero;
 

@@ -1,6 +1,7 @@
 #include "GameManager.h"
-#include <iostream>
+#include "StandardFjendeFactory.h"
 
+#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -11,6 +12,7 @@ GameManager::GameManager() {
     opretPredefineredeHelte();
 
     aktivHero = nullptr;
+    grottegren = nullptr;
 }
 
 void GameManager::start() {
@@ -48,6 +50,7 @@ void GameManager::visHovedmenu() {
     } while (valg != 3);
 }
 
+// Jeg burde flytte en funktion som denne til en separat fil kaldt utility el.
 bool GameManager::erKunWhitespaces(const string& tekst) {
     for (char c : tekst) {
         if (!isspace(c)) {
@@ -99,6 +102,7 @@ void GameManager::loadHero() {
         << " HP: " << predefineredeHelte[i].hentMaxHP() 
         << ", Styrke: " << predefineredeHelte[i].hentStyrke() 
         << ", Level: " << predefineredeHelte[i].hentLevel()
+        << ", Guld: " << predefineredeHelte[i].hentGuld()
         << endl;
     }
 
@@ -109,6 +113,19 @@ void GameManager::loadHero() {
     cout << "Helt valgt: " << aktivHero->hentNavn() << endl;
 }
 
+void GameManager::opretGrotter() {
+    if (!aktivHero) {
+        cout << "Kan ikke oprette grotter uden en aktiv helt.\n";
+        return;
+    }
+
+    // Fix det her
+    if (!grottegren) {
+        grottegren = new GrotteGenerator(new StandardFjendeFactory(fjendeListe));
+    }
+    grotterne = grottegren->genererGrotter(aktivHero->hentLevel(), aktivHero->hentLevel());
+}
+
 
 void GameManager::eventyrMenu() {
     int valg;
@@ -116,26 +133,32 @@ void GameManager::eventyrMenu() {
     do {
         cout << "\n--- EVENTYR MENU ---\n";
         cout << "1. Kæmp mod en fjende\n";
-        cout << "2. Tilbage til hovedmenu\n";
+        cout << "2. Udforsk en grotte\n";
+        cout << "3. Tilbage til hovedmenu\n";
         cout << "Valg: ";
         
-        valg = hentGyldigtTal(1, 2);
+        valg = hentGyldigtTal(1, 3);
 
         switch (valg) {
             case 1:
                 kæmpModFjende();
                 break;
             case 2:
+                if (grotterne.empty()) opretGrotter();
+                vælgOgGennemførGrotte();
+                break;
+            case 3:
                 cout << "Tilbage til hovedmenu...\n";
                 break;
             default:
                 cout << "Ugyldigt valg. Prøv igen.\n";
         }
 
-    } while (valg != 2 && aktivHero->erILive());
+    } while (valg != 3 && aktivHero->erILive());
 }
 
 // Hjælpefunktion til at sørge for gyldigt input af brugeren
+// Jeg burde flytte en funktion som denne til en separat fil kaldt utility el.
 int GameManager::hentGyldigtTal(int min, int max) {
     int valg;
     string input;
@@ -229,11 +252,82 @@ void GameManager::kæmpModFjende() {
     }
 }
 
+// Denne funktion er næsten identisk med kæmpModFjende, men den tager en fjende som parameter
+// og kæmper mod den i stedet for at vælge en fra listen.
+void GameManager::kæmpModFjendeIGrotte(const Fjende& fjende) {
+    Fjende kopi = fjende;
+
+    cout << "--- GROTTEKAMP ---\n";
+    cout << aktivHero->hentNavn() << " kæmper mod " << kopi.hentNavn() << "!\n\n";
+    
+    cout << aktivHero->hentNavn() << " har\n" 
+    << "HP: " << aktivHero->hentHP() << "\n"
+    << "styrke: "<<aktivHero->hentStyrke() << "\n\n";
+
+    cout << kopi.hentNavn() << " har\n" 
+    << "HP: " << kopi.hentHP() << "\n"
+    << "styrke: "<< kopi.hentStyrke() << "\n\n";
+    
+    while (aktivHero->erILive() && kopi.erILive()) {
+        cout << "Tryk på ENTER for at angribe!\n";
+
+        string input;
+        getline(cin, input);
+        if (input.empty()) {
+            cout << aktivHero->hentNavn() << " rammer " << kopi.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
+            kopi.tagSkade(aktivHero->hentStyrke());
+        } else {
+            cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
+        }
+
+        if (!kopi.erILive()) {
+            break;
+        }
+
+        cout << kopi.hentNavn() << " har " << kopi.hentHP() << " HP tilbage.\n\n";
+        cout << kopi.hentNavn() << " rammer " << aktivHero->hentNavn() << " for " << kopi.hentStyrke() << " skade!\n";
+
+        aktivHero->tagSkade(kopi.hentStyrke());
+
+        if (!aktivHero->erILive()) {
+            break;
+        }
+
+        cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n\n";
+        
+    }
+
+    if (aktivHero->erILive()) {
+        aktivHero->givFuldHP();
+        // Murloc får double XP
+        if (aktivHero->hentNavn() == "Murloc") {
+            cout << aktivHero->hentNavn() << " vandt og får double XP! " << aktivHero->hentNavn() << " får derfor " << fjende.hentXPGevinst()*2 << " XP!\n";
+            aktivHero->givXP(kopi.hentXPGevinst()*2);
+        } else {
+            cout << aktivHero->hentNavn() << " vandt og får " << kopi.hentXPGevinst() << " XP!\n";
+            aktivHero->givXP(kopi.hentXPGevinst());
+        }
+        
+        if (aktivHero->levelOp()) {
+            aktivHero->givFuldHP();
+            cout << "Du er steget i level!\n";
+            cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
+            cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
+            cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
+            
+        }
+        cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
+
+    } else {
+        cout << aktivHero->hentNavn() << " døde i kampen...\n";
+    }
+}
+
 void GameManager::visFjender() const {
-    for (size_t i = 0; i < fjendeliste.size(); ++i) {
-        cout << i + 1 << ". " << fjendeliste[i].hentNavn() << " (HP: "
-             << fjendeliste[i].hentMaxHP() << ", Styrke: "
-             << fjendeliste[i].hentStyrke() << ")\n";
+    for (size_t i = 0; i < fjendeListe.size(); ++i) {
+        cout << i + 1 << ". " << fjendeListe[i].hentNavn() << " (HP: "
+             << fjendeListe[i].hentMaxHP() << ", Styrke: "
+             << fjendeListe[i].hentStyrke() << ")\n";
     }
 }
 
@@ -241,29 +335,59 @@ Fjende GameManager::vælgFjende() {
     cout << "--- Vælg en fjende ---\n";
     visFjender();
     int valg;
-    valg = hentGyldigtTal(1, fjendeliste.size());
-    return fjendeliste[valg - 1];
+    valg = hentGyldigtTal(1, fjendeListe.size());
+    return fjendeListe[valg - 1];
 }
 
 void GameManager::opretFjender() {
-    fjendeliste.push_back(Fjende("Wolf Cub", 4, 4, 1, 100));
-    fjendeliste.push_back(Fjende("Young Forest Wolf", 4, 4, 2, 200));
-    fjendeliste.push_back(Fjende("Feronius the Ferocious", 8, 8, 3, 400));
-    fjendeliste.push_back(Fjende("Beach Crawler", 10, 10, 4, 500));
-    fjendeliste.push_back(Fjende("Young Crocolisk", 15, 15, 5, 800));
-    fjendeliste.push_back(Fjende("Mother Crocolisk", 30, 30, 5, 1000));
-    fjendeliste.push_back(Fjende("Kobold Miner", 15, 15, 10, 1500));
-    fjendeliste.push_back(Fjende("Fagnus the Mage", 11, 11, 20, 2000));
-    fjendeliste.push_back(Fjende("Dragon", 100, 100, 10, 3000));
+    fjendeListe.push_back(Fjende("Wolf Cub", 4, 4, 1, 100));
+    fjendeListe.push_back(Fjende("Young Forest Wolf", 4, 4, 2, 200));
+    fjendeListe.push_back(Fjende("Feronius the Ferocious", 8, 8, 3, 400));
+    fjendeListe.push_back(Fjende("Beach Crawler", 10, 10, 4, 500));
+    fjendeListe.push_back(Fjende("Young Crocolisk", 15, 15, 5, 800));
+    fjendeListe.push_back(Fjende("Mother Crocolisk", 30, 30, 5, 1000));
+    fjendeListe.push_back(Fjende("Kobold Miner", 15, 15, 10, 1500));
+    fjendeListe.push_back(Fjende("Fagnus the Mage", 13, 13, 20, 2000));
+    fjendeListe.push_back(Fjende("Dragon", 100, 100, 10, 3000));
 }
 
+void GameManager::vælgOgGennemførGrotte() {
+    cout << "--- Vælg en grotte ---\n";
+    for (size_t i = 0; i < grotterne.size(); ++i) {
+        cout << i + 1 << ": " << grotterne[i].hentNavn() << " (Guld: " << grotterne[i].hentGuld() << ")\n";
+    }
+
+    int valg = hentGyldigtTal(1, grotterne.size());
+    Grotte valgt = grotterne[valg - 1];
+
+    for (Fjende fjende : valgt.hentFjender()) {
+        cout << "Du møder: " << fjende.hentNavn() << "\n";
+        kæmpModFjendeIGrotte(fjende);
+        if (!aktivHero->erILive()) {
+            cout << "Du er død og kan ikke fortsætte eventyret.\n";
+            return;
+        }
+    }
+
+    aktivHero->givGuld(valgt.hentGuld());
+    cout << "Du har gennemført " << valgt.hentNavn() << " og får " << valgt.hentGuld() << " guld!\n";
+    cout << "Du har nu " << aktivHero->hentGuld() << " guld.\n"; 
+
+    // Rydder alle grotter sådan at der dannes nye grotter næste gang
+    grotterne.clear();
+    
+    eventyrMenu();
+}
+
+
 void GameManager::opretPredefineredeHelte() {
-    predefineredeHelte.push_back(Hero("Murloc", 4, 4, 1, 0, 1));
-    predefineredeHelte.push_back(Hero("Thor", 14, 14, 4, 0, 4));
-    predefineredeHelte.push_back(Hero("Loke", 8, 8, 6, 0, 3));
-    predefineredeHelte.push_back(Hero("Odin", 18, 18, 3, 0, 5));
+    predefineredeHelte.push_back(Hero("Murloc", 4, 4, 1, 0, 1, 0));
+    predefineredeHelte.push_back(Hero("Thor", 14, 14, 4, 0, 4, 0));
+    predefineredeHelte.push_back(Hero("Loke", 8, 8, 6, 0, 3, 0));
+    predefineredeHelte.push_back(Hero("Odin", 18, 18, 3, 0, 5, 0));
 }
 
 GameManager::~GameManager() {
     delete aktivHero;
+    delete grottegren;
 }

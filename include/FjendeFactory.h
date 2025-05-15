@@ -9,8 +9,6 @@ using namespace std;
 
 class FjendeFactory {
 public:
-    FjendeFactory();
-
     virtual Fjende skabFjende(int helteLevel) = 0;
     virtual vector<Fjende> skabFjender(int helteLevel, int antal) = 0;
     

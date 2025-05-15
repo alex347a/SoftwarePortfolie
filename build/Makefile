@@ -177,6 +177,54 @@ src/GameManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GameManager.cpp.s
 .PHONY : src/GameManager.cpp.s
 
+src/Grotte.o: src/Grotte.cpp.o
+.PHONY : src/Grotte.o
+
+# target to build an object file
+src/Grotte.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Grotte.cpp.o
+.PHONY : src/Grotte.cpp.o
+
+src/Grotte.i: src/Grotte.cpp.i
+.PHONY : src/Grotte.i
+
+# target to preprocess a source file
+src/Grotte.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Grotte.cpp.i
+.PHONY : src/Grotte.cpp.i
+
+src/Grotte.s: src/Grotte.cpp.s
+.PHONY : src/Grotte.s
+
+# target to generate assembly for a file
+src/Grotte.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Grotte.cpp.s
+.PHONY : src/Grotte.cpp.s
+
+src/GrotteGenerator.o: src/GrotteGenerator.cpp.o
+.PHONY : src/GrotteGenerator.o
+
+# target to build an object file
+src/GrotteGenerator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o
+.PHONY : src/GrotteGenerator.cpp.o
+
+src/GrotteGenerator.i: src/GrotteGenerator.cpp.i
+.PHONY : src/GrotteGenerator.i
+
+# target to preprocess a source file
+src/GrotteGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.i
+.PHONY : src/GrotteGenerator.cpp.i
+
+src/GrotteGenerator.s: src/GrotteGenerator.cpp.s
+.PHONY : src/GrotteGenerator.s
+
+# target to generate assembly for a file
+src/GrotteGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.s
+.PHONY : src/GrotteGenerator.cpp.s
+
 src/Hero.o: src/Hero.cpp.o
 .PHONY : src/Hero.o
 
@@ -225,6 +273,30 @@ src/Karakter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Karakter.cpp.s
 .PHONY : src/Karakter.cpp.s
 
+src/StandardFjendeFactory.o: src/StandardFjendeFactory.cpp.o
+.PHONY : src/StandardFjendeFactory.o
+
+# target to build an object file
+src/StandardFjendeFactory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o
+.PHONY : src/StandardFjendeFactory.cpp.o
+
+src/StandardFjendeFactory.i: src/StandardFjendeFactory.cpp.i
+.PHONY : src/StandardFjendeFactory.i
+
+# target to preprocess a source file
+src/StandardFjendeFactory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.i
+.PHONY : src/StandardFjendeFactory.cpp.i
+
+src/StandardFjendeFactory.s: src/StandardFjendeFactory.cpp.s
+.PHONY : src/StandardFjendeFactory.s
+
+# target to generate assembly for a file
+src/StandardFjendeFactory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.s
+.PHONY : src/StandardFjendeFactory.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -264,12 +336,21 @@ help:
 	@echo "... src/GameManager.o"
 	@echo "... src/GameManager.i"
 	@echo "... src/GameManager.s"
+	@echo "... src/Grotte.o"
+	@echo "... src/Grotte.i"
+	@echo "... src/Grotte.s"
+	@echo "... src/GrotteGenerator.o"
+	@echo "... src/GrotteGenerator.i"
+	@echo "... src/GrotteGenerator.s"
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
 	@echo "... src/Karakter.o"
 	@echo "... src/Karakter.i"
 	@echo "... src/Karakter.s"
+	@echo "... src/StandardFjendeFactory.o"
+	@echo "... src/StandardFjendeFactory.i"
+	@echo "... src/StandardFjendeFactory.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

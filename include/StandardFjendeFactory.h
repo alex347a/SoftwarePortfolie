@@ -10,7 +10,7 @@ using namespace std;
 
 class StandardFjendeFactory : public FjendeFactory {
 public:
-    StandardFjendeFactory();
+    StandardFjendeFactory(const vector<Fjende>& fjender);
 
     Fjende skabFjende(int helteLevel) override;
     vector<Fjende> skabFjender(int helteLevel, int antal) override;
@@ -18,9 +18,10 @@ public:
     ~StandardFjendeFactory();
 
 private:
-    Fjende lavFjendeMedModifier(const string& baseNavn, const string& modifier, int helteLevel);
+    Fjende lavFjendeMedModifier(const string& fjendeNavn, const string& modifier);
     
-    vector<string> baseNavne;
+    vector<Fjende> fjendeListe;
+    vector<string> fjendeNavn;
     vector<string> styrkeModifiers;
 };
 
