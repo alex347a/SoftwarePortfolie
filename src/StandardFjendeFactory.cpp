@@ -56,10 +56,7 @@ Fjende StandardFjendeFactory::lavFjendeMedModifier(const string& fjendeNavn, con
             if (modifier == "Weak") {
                 maxHP *= 0.75;
                 styrke *= 0.75;
-                xp *= 1;
             } else if (modifier == "Average") {
-                maxHP *= 1;
-                styrke *= 1;
                 xp *= 1.2;
             } else if (modifier == "Strong") {
                 maxHP *= 1.5;
@@ -70,9 +67,7 @@ Fjende StandardFjendeFactory::lavFjendeMedModifier(const string& fjendeNavn, con
                 styrke *= 2;
                 xp *= 2.5;
             }
-            if (styrke < 1){
-                styrke = 1;
-            }
+            if (styrke < 1) styrke = 1;
             hp = maxHP;
             break;
         }

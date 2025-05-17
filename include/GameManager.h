@@ -21,7 +21,7 @@ protected:
     void visHovedmenu();
     void nyHero();
     void loadHero();
-    void eventyrMenu();
+    bool eventyrMenu();
 
     int hentGyldigtTal(int min, int max);
     bool erKunWhitespaces(const string& tekst);
@@ -31,7 +31,7 @@ protected:
     void visFjender() const;
     Fjende vælgFjende();
     void opretGrotter();
-    void vælgOgGennemførGrotte();
+    bool vælgOgGennemførGrotte();
 
     vector<Fjende> fjendeListe;
     vector<Hero> predefineredeHelte;

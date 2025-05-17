@@ -90,6 +90,7 @@ void GameManager::nyHero() {
         }
     }
 
+
     aktivHero = new Hero(navn);
     cout << "Ny helt oprettet: " << aktivHero->hentNavn() << endl;
 }
@@ -119,7 +120,6 @@ void GameManager::opretGrotter() {
         return;
     }
 
-    // Fix det her
     if (!grottegren) {
         grottegren = new GrotteGenerator(new StandardFjendeFactory(fjendeListe));
     }
@@ -127,7 +127,7 @@ void GameManager::opretGrotter() {
 }
 
 
-void GameManager::eventyrMenu() {
+bool GameManager::eventyrMenu() {
     int valg;
 
     do {
@@ -142,19 +142,25 @@ void GameManager::eventyrMenu() {
         switch (valg) {
             case 1:
                 kæmpModFjende();
+                if (!aktivHero->erILive()) {
+                    return true;
+                }
                 break;
             case 2:
-                if (grotterne.empty()) opretGrotter();
-                vælgOgGennemførGrotte();
+                opretGrotter();
+                if (vælgOgGennemførGrotte()) {
+                    return true;
+                }
                 break;
             case 3:
                 cout << "Tilbage til hovedmenu...\n";
-                break;
+                return true;
             default:
                 cout << "Ugyldigt valg. Prøv igen.\n";
         }
 
     } while (valg != 3 && aktivHero->erILive());
+    return true;
 }
 
 // Hjælpefunktion til at sørge for gyldigt input af brugeren
@@ -237,7 +243,7 @@ void GameManager::kæmpModFjende() {
             aktivHero->givXP(fjende.hentXPGevinst());
         }
         
-        if (aktivHero->levelOp()) {
+        while (aktivHero->levelOp()) {
             aktivHero->givFuldHP();
             cout << "Du er steget i level!\n";
             cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
@@ -351,10 +357,20 @@ void GameManager::opretFjender() {
     fjendeListe.push_back(Fjende("Dragon", 100, 100, 10, 3000));
 }
 
-void GameManager::vælgOgGennemførGrotte() {
+bool GameManager::vælgOgGennemførGrotte() {
     cout << "--- Vælg en grotte ---\n";
     for (size_t i = 0; i < grotterne.size(); ++i) {
         cout << i + 1 << ": " << grotterne[i].hentNavn() << " (Guld: " << grotterne[i].hentGuld() << ")\n";
+
+    cout << "   Fjender: ";
+        const vector<Fjende>& fjender = grotterne[i].hentFjender();
+        for (size_t j = 0; j < fjender.size(); ++j) {
+            cout << fjender[j].hentNavn();
+            if (j != fjender.size() - 1) {
+                cout << ",\n            ";
+            }
+        }
+        cout << endl << endl;
     }
 
     int valg = hentGyldigtTal(1, grotterne.size());
@@ -365,7 +381,7 @@ void GameManager::vælgOgGennemførGrotte() {
         kæmpModFjendeIGrotte(fjende);
         if (!aktivHero->erILive()) {
             cout << "Du er død og kan ikke fortsætte eventyret.\n";
-            return;
+            return true;
         }
     }
 
@@ -376,7 +392,7 @@ void GameManager::vælgOgGennemførGrotte() {
     // Rydder alle grotter sådan at der dannes nye grotter næste gang
     grotterne.clear();
     
-    eventyrMenu();
+    return false;
 }
 
 
