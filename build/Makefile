@@ -297,6 +297,30 @@ src/StandardFjendeFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.s
 .PHONY : src/StandardFjendeFactory.cpp.s
 
+src/Våben.o: src/Våben.cpp.o
+.PHONY : src/Våben.o
+
+# target to build an object file
+src/Våben.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.o
+.PHONY : src/Våben.cpp.o
+
+src/Våben.i: src/Våben.cpp.i
+.PHONY : src/Våben.i
+
+# target to preprocess a source file
+src/Våben.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.i
+.PHONY : src/Våben.cpp.i
+
+src/Våben.s: src/Våben.cpp.s
+.PHONY : src/Våben.s
+
+# target to generate assembly for a file
+src/Våben.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.s
+.PHONY : src/Våben.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -351,6 +375,9 @@ help:
 	@echo "... src/StandardFjendeFactory.o"
 	@echo "... src/StandardFjendeFactory.i"
 	@echo "... src/StandardFjendeFactory.s"
+	@echo "... src/Våben.o"
+	@echo "... src/Våben.i"
+	@echo "... src/Våben.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

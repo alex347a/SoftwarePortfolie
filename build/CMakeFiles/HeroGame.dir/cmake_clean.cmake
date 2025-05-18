@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o"
   "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o.d"
+  "CMakeFiles/HeroGame.dir/src/Våben.cpp.o"
+  "CMakeFiles/HeroGame.dir/src/Våben.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/main.cpp.o"
   "CMakeFiles/HeroGame.dir/src/main.cpp.o.d"
   "HeroGame"

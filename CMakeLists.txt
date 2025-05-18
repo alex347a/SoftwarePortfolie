@@ -3,16 +3,30 @@ project(HeroGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Compiler warnings configuration
+if(MSVC)
+    add_compile_options(/W4 /WX /permissive-)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+    add_compile_options(-Wconversion -Wsign-conversion)
+endif()
+
 include_directories(include)
 
-add_executable(HeroGame
-    src/main.cpp
-    src/Karakter.cpp
-    src/Hero.cpp
-    src/Fjende.cpp
-    src/GameManager.cpp
-    src/Grotte.cpp
-    src/StandardFjendeFactory.cpp
-    src/GrotteGenerator.cpp
+file(GLOB SOURCES "src/*.cpp")
+
+add_executable(HeroGame ${SOURCES})
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    target_compile_options(HeroGame PRIVATE -Weverything)
+endif()
+
+target_compile_definitions(HeroGame PRIVATE 
+    $<$<CONFIG:DEBUG>:DEBUG=1>
 )
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        target_compile_options(HeroGame PRIVATE -g3)
+    endif()
+endif()

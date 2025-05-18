@@ -22,6 +22,7 @@ protected:
     void nyHero();
     void loadHero();
     bool eventyrMenu();
+    void visInventarMenu();
 
     int hentGyldigtTal(int min, int max);
     bool erKunWhitespaces(const string& tekst);

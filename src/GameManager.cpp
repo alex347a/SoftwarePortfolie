@@ -34,10 +34,16 @@ void GameManager::visHovedmenu() {
         switch (valg) {
             case 1:
                 nyHero();
+                aktivHero->tilføjVåben(Våben("Jernsværd", 5, 1, 20));
+                aktivHero->tilføjVåben(Våben("Hammer", 3, 2, 30));
+                aktivHero->tilføjVåben(Våben("Ståløkse", 8, 3, 15));
                 eventyrMenu();
                 break;
             case 2:
                 loadHero();
+                aktivHero->tilføjVåben(Våben("Jernsværd", 5, 1, 20));
+                aktivHero->tilføjVåben(Våben("Hammer", 3, 2, 30));
+                aktivHero->tilføjVåben(Våben("Ståløkse", 8, 3, 15));
                 eventyrMenu();
                 break;
             case 3:
@@ -134,10 +140,11 @@ bool GameManager::eventyrMenu() {
         cout << "\n--- EVENTYR MENU ---\n";
         cout << "1. Kæmp mod en fjende\n";
         cout << "2. Udforsk en grotte\n";
-        cout << "3. Tilbage til hovedmenu\n";
+        cout << "3. Vis inventar\n";
+        cout << "4. Tilbage til hovedmenu\n";
         cout << "Valg: ";
         
-        valg = hentGyldigtTal(1, 3);
+        valg = hentGyldigtTal(1, 4);
 
         switch (valg) {
             case 1:
@@ -153,13 +160,19 @@ bool GameManager::eventyrMenu() {
                 }
                 break;
             case 3:
+                visInventarMenu(); 
+                break;
+                if (!aktivHero->erILive()) {
+                    return true;
+                }
+            case 4:
                 cout << "Tilbage til hovedmenu...\n";
                 return true;
             default:
                 cout << "Ugyldigt valg. Prøv igen.\n";
         }
 
-    } while (valg != 3 && aktivHero->erILive());
+    } while (valg != 4 && aktivHero->erILive());
     return true;
 }
 
@@ -393,6 +406,38 @@ bool GameManager::vælgOgGennemførGrotte() {
     grotterne.clear();
     
     return false;
+}
+
+void GameManager::visInventarMenu() {
+    int valg;
+    if (!aktivHero) {
+        cout << "Ingen aktiv helt!\n";
+        return;
+    }
+    else if (aktivHero->hentAntalVåben() == 0) {
+        cout << "Ingen våben i inventar!\n";
+        return;
+    } 
+    do {
+        aktivHero->visInventar();
+        cout << "\n1. Udstyr våben\n"
+             << "2. Tilbage til eventyrmenu\n"
+             << "Valg: ";
+
+        valg = hentGyldigtTal(1, 2);
+
+        if (valg == 1) {
+            cout << "Vælg våben (1-" << aktivHero->hentAntalVåben() << "): ";
+            int valgAfVåben = hentGyldigtTal(1, aktivHero->hentAntalVåben());
+
+            if (aktivHero->udstyrMedVåbenFraIndex(valgAfVåben - 1)) {
+                cout << "Du har nu udstyret " 
+                     << aktivHero->hentUdstyretVåben()->hentNavn() << "!\n";
+            } else {
+                cout << "Kunne ikke udstyre våben!\n";
+            }
+        }
+    } while (valg != 2);
 }
 
 
