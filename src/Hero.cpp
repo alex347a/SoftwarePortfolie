@@ -20,8 +20,8 @@ int Hero::hentGuld() const {
     return guld;
 }
 
-int Hero::hentEffektivSkade() const {
-    if (aktivVåben) {
+int Hero::hentSkadeMedVåben() const {
+    if (aktivVåben && !aktivVåben->erØdelagt()) {
         return aktivVåben->hentTotalStyrke(styrke);
     }
     return styrke;
@@ -69,6 +69,14 @@ void Hero::visInventar() const {
         }
         cout << "\n";
     }
+}
+
+void Hero::brugAktivVåben() {
+    aktivVåben->Våben::brug();
+    if (aktivVåben->erØdelagt()) {
+        cout << aktivVåben->hentNavn() << " er ødelagt!\n";
+        aktivVåben = nullptr;
+    } 
 }
 
 bool Hero::levelOp() {

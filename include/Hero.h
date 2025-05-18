@@ -18,7 +18,7 @@ public:
     int hentLevel() const;
     int hentXP() const;
     int hentGuld() const;
-    int hentEffektivSkade() const;
+    int hentSkadeMedVåben() const;
     int hentAntalVåben() const;
 
     void givFuldHP();
@@ -27,6 +27,7 @@ public:
     void tilføjVåben(Våben våben);
     void setAktivVåben(Våben* våben);
     void visInventar() const;
+    void brugAktivVåben();
 
     bool levelOp();
     bool udstyrMedVåbenFraIndex(int index);

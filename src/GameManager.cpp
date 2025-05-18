@@ -206,8 +206,15 @@ void GameManager::kæmpModFjende() {
     << "styrke: "<<aktivHero->hentStyrke() << "\n\n";
 
     cout << fjende.hentNavn() << " har\n" 
-    << "HP: " << fjende.hentHP() << "\n"
-    << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    << "HP: " << fjende.hentHP() << "\n";
+
+    if (aktivHero->hentUdstyretVåben()) {
+        cout << "Våben: " << aktivHero->hentUdstyretVåben()->hentNavn() << " (" << aktivHero->hentUdstyretVåben()->hentNuværendeHoldarhed() << "/" << aktivHero->hentUdstyretVåben()->hentMaxHoldbarhed() << ")\n"
+        << "Skade:" << aktivHero->hentSkadeMedVåben() << "\n\n";
+        aktivHero->brugAktivVåben();
+    } else {
+        cout << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    }
     
     while (aktivHero->erILive() && fjende.erILive()) {
         cout << "Tryk på ENTER for at angribe!\n";
@@ -215,8 +222,14 @@ void GameManager::kæmpModFjende() {
         string input;
         getline(cin, input);
         if (input.empty()) {
-            cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
-            fjende.tagSkade(aktivHero->hentStyrke());
+            cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for ";
+            if (aktivHero->hentUdstyretVåben()) {
+                cout << aktivHero->hentSkadeMedVåben() << " skade!\n";
+                fjende.tagSkade(aktivHero->hentSkadeMedVåben());
+            } else {
+                cout << aktivHero->hentStyrke() << " skade!\n";
+                fjende.tagSkade(aktivHero->hentStyrke());
+            }
         } else {
             cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
         }
@@ -280,8 +293,15 @@ void GameManager::kæmpModFjendeIGrotte(const Fjende& fjende) {
     cout << aktivHero->hentNavn() << " kæmper mod " << kopi.hentNavn() << "!\n\n";
     
     cout << aktivHero->hentNavn() << " har\n" 
-    << "HP: " << aktivHero->hentHP() << "\n"
-    << "styrke: "<<aktivHero->hentStyrke() << "\n\n";
+    << "HP: " << aktivHero->hentHP() << "\n";
+    
+    if (aktivHero->hentUdstyretVåben()) {
+        cout << "Våben: " << aktivHero->hentUdstyretVåben()->hentNavn() << " (" << aktivHero->hentUdstyretVåben()->hentNuværendeHoldarhed() << "/" << aktivHero->hentUdstyretVåben()->hentMaxHoldbarhed() << ")\n"
+        << "Skade:" << aktivHero->hentSkadeMedVåben() << "\n\n";
+        aktivHero->brugAktivVåben();
+    } else {
+        cout << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    }
 
     cout << kopi.hentNavn() << " har\n" 
     << "HP: " << kopi.hentHP() << "\n"
@@ -293,8 +313,14 @@ void GameManager::kæmpModFjendeIGrotte(const Fjende& fjende) {
         string input;
         getline(cin, input);
         if (input.empty()) {
-            cout << aktivHero->hentNavn() << " rammer " << kopi.hentNavn() << " for " << aktivHero->hentStyrke() << " skade!\n";
-            kopi.tagSkade(aktivHero->hentStyrke());
+            cout << aktivHero->hentNavn() << " rammer " << kopi.hentNavn() << " for ";
+            if (aktivHero->hentUdstyretVåben()) {
+                cout << aktivHero->hentSkadeMedVåben() << " skade!\n";
+                kopi.tagSkade(aktivHero->hentSkadeMedVåben());
+            } else {
+                cout << aktivHero->hentStyrke() << " skade!\n";
+                kopi.tagSkade(aktivHero->hentStyrke());
+            }
         } else {
             cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
         }
