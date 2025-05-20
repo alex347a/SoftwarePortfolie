@@ -249,6 +249,30 @@ src/Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.s
 .PHONY : src/Hero.cpp.s
 
+src/Hjælpefunktioner.o: src/Hjælpefunktioner.cpp.o
+.PHONY : src/Hjælpefunktioner.o
+
+# target to build an object file
+src/Hjælpefunktioner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o
+.PHONY : src/Hjælpefunktioner.cpp.o
+
+src/Hjælpefunktioner.i: src/Hjælpefunktioner.cpp.i
+.PHONY : src/Hjælpefunktioner.i
+
+# target to preprocess a source file
+src/Hjælpefunktioner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.i
+.PHONY : src/Hjælpefunktioner.cpp.i
+
+src/Hjælpefunktioner.s: src/Hjælpefunktioner.cpp.s
+.PHONY : src/Hjælpefunktioner.s
+
+# target to generate assembly for a file
+src/Hjælpefunktioner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.s
+.PHONY : src/Hjælpefunktioner.cpp.s
+
 src/Karakter.o: src/Karakter.cpp.o
 .PHONY : src/Karakter.o
 
@@ -369,6 +393,9 @@ help:
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
+	@echo "... src/Hjælpefunktioner.o"
+	@echo "... src/Hjælpefunktioner.i"
+	@echo "... src/Hjælpefunktioner.s"
 	@echo "... src/Karakter.o"
 	@echo "... src/Karakter.i"
 	@echo "... src/Karakter.s"

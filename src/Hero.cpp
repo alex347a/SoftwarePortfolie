@@ -20,14 +20,14 @@ int Hero::hentGuld() const {
     return guld;
 }
 
-int Hero::hentSkadeMedVåben() const {
-    if (aktivVåben && !aktivVåben->erØdelagt()) {
-        return aktivVåben->hentTotalStyrke(styrke);
+int Hero::hentSkadeMedVaaben() const {
+    if (aktivVaaben && !aktivVaaben->erOedelagt()) {
+        return aktivVaaben->hentTotalStyrke(styrke);
     }
     return styrke;
 }
 
-int Hero::hentAntalVåben() const {
+int Hero::hentAntalVaaben() const {
     return inventar.size();
 }
 
@@ -35,54 +35,54 @@ void Hero::givFuldHP() {
     hp = maxHP;
 }
 
-void Hero::givXP(int xpMængde) {
-    xp += xpMængde;
+void Hero::givXP(int xpMaengde) {
+    xp += xpMaengde;
 }
 
-void Hero::givGuld(int guldMængde) {
-    guld += guldMængde;
+void Hero::givGuld(int guldMaengde) {
+    guld += guldMaengde;
 }
 
-void Hero::tilføjVåben(Våben våben) {
-    inventar.push_back(våben);
+void Hero::tilfoejVaaben(Vaaben vaaben) {
+    inventar.push_back(vaaben);
 }
 
-void Hero::setAktivVåben(Våben* våben) {
-    aktivVåben = våben;
+void Hero::setAktivVaaben(Vaaben* vaaben) {
+    aktivVaaben = vaaben;
 }
 
 void Hero::visInventar() const {
     if (inventar.empty()) {
-        cout << "No weapons in inventory!\n";
+        cout << "Ingen vaaben i inventar!\n";
         return;
     }
 
-    cout << "=== Weapons Inventory ===\n";
+    cout << "=== Vaaben inventar ===\n";
     for (size_t i = 0; i < inventar.size(); ++i) {
         cout << i + 1 << ". " << inventar[i].hentNavn()
-                  << " (Dmg: +" << inventar[i].hentTotalStyrke(styrke)
-                  << ", Dur: " << inventar[i].hentNuværendeHoldarhed()
+                  << " (Skade: +" << inventar[i].hentTotalStyrke(styrke)
+                  << ", Holdbarhed: " << inventar[i].hentNuvaerendeHoldbarhed()
                   << "/" << inventar[i].hentMaxHoldbarhed() << ")";
         
-        if (aktivVåben == &inventar[i]) {
-            cout << " [EQUIPPED]";
+        if (aktivVaaben == &inventar[i]) {
+            cout << " [UDSTYRET]";
         }
         cout << "\n";
     }
 }
 
-void Hero::brugAktivVåben() {
-    aktivVåben->Våben::brug();
-    if (aktivVåben->erØdelagt()) {
-        cout << aktivVåben->hentNavn() << " er ødelagt!\n";
-        aktivVåben = nullptr;
+void Hero::brugAktivVaaben() {
+    aktivVaaben->brug();
+    if (aktivVaaben->erOedelagt()) {
+        cout << aktivVaaben->hentNavn() << " er oedelagt!\n";
+        aktivVaaben = nullptr;
     } 
 }
 
 bool Hero::levelOp() {
-    int levelGrænse = level * 1000;
-    if (xp >= levelGrænse) {
-        xp -= levelGrænse;
+    int levelGraense = level * 1000;
+    if (xp >= levelGraense) {
+        xp -= levelGraense;
         level++;
         maxHP += 2;
         styrke += 1;
@@ -91,15 +91,15 @@ bool Hero::levelOp() {
     return false;
 }
 
-bool Hero::udstyrMedVåbenFraIndex(int index) {
+bool Hero::udstyrMedVaabenFraIndex(int index) {
     if (index < 0 || index >= inventar.size()) {
-        cout << "Invalid weapon index!\n";
+        cout << "Ikke et validt vaabenindeks!\n";
         return false;
     }
-    aktivVåben = &inventar[index];
+    aktivVaaben = &inventar[index];
     return true;
 }
 
-const Våben* Hero::hentUdstyretVåben() const {
-    return aktivVåben;
+const Vaaben* Hero::hentUdstyretVaaben() const {
+    return aktivVaaben;
 }

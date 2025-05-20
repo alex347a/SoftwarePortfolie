@@ -15,7 +15,7 @@ public:
     int hentHP() const;
     int hentStyrke() const;
 
-    void tagSkade(int mængde);
+    void tagSkade(int maengde);
     bool erILive() const;
 
     virtual ~Karakter() = default; // Arv

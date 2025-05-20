@@ -2,7 +2,7 @@
 #define HERO_H
 
 #include "Karakter.h"
-#include "Våben.h"
+#include "Vaaben.h"
 
 #include <string>
 #include <vector>
@@ -18,28 +18,28 @@ public:
     int hentLevel() const;
     int hentXP() const;
     int hentGuld() const;
-    int hentSkadeMedVåben() const;
-    int hentAntalVåben() const;
+    int hentSkadeMedVaaben() const;
+    int hentAntalVaaben() const;
 
     void givFuldHP();
-    void givXP(int xpMængde);
-    void givGuld(int guldMængde);
-    void tilføjVåben(Våben våben);
-    void setAktivVåben(Våben* våben);
+    void givXP(int xpMaengde);
+    void givGuld(int guldMaengde);
+    void tilfoejVaaben(Vaaben Vaaben);
+    void setAktivVaaben(Vaaben* Vaaben);
     void visInventar() const;
-    void brugAktivVåben();
+    void brugAktivVaaben();
 
     bool levelOp();
-    bool udstyrMedVåbenFraIndex(int index);
+    bool udstyrMedVaabenFraIndex(int index);
 
-    const Våben* hentUdstyretVåben() const;
+    const Vaaben* hentUdstyretVaaben() const;
     
 private:
     int xp;
     int level;
     int guld;
-    vector<Våben> inventar;
-    Våben* aktivVåben;
+    vector<Vaaben> inventar;
+    Vaaben* aktivVaaben;
 };
 
 #endif

@@ -139,10 +139,24 @@ CMakeFiles/HeroGame.dir/src/Hero.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HeroGame.dir/src/Hero.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/SoftwarePortfolie/src/Hero.cpp -o CMakeFiles/HeroGame.dir/src/Hero.cpp.s
 
+CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o: CMakeFiles/HeroGame.dir/flags.make
+CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o: ../src/Hjælpefunktioner.cpp
+CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o: CMakeFiles/HeroGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o -MF CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o.d -o CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o -c /home/alex/SoftwarePortfolie/src/Hjælpefunktioner.cpp
+
+CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alex/SoftwarePortfolie/src/Hjælpefunktioner.cpp > CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.i
+
+CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alex/SoftwarePortfolie/src/Hjælpefunktioner.cpp -o CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.s
+
 CMakeFiles/HeroGame.dir/src/Karakter.cpp.o: CMakeFiles/HeroGame.dir/flags.make
 CMakeFiles/HeroGame.dir/src/Karakter.cpp.o: ../src/Karakter.cpp
 CMakeFiles/HeroGame.dir/src/Karakter.cpp.o: CMakeFiles/HeroGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/HeroGame.dir/src/Karakter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/HeroGame.dir/src/Karakter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HeroGame.dir/src/Karakter.cpp.o -MF CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d -o CMakeFiles/HeroGame.dir/src/Karakter.cpp.o -c /home/alex/SoftwarePortfolie/src/Karakter.cpp
 
 CMakeFiles/HeroGame.dir/src/Karakter.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/HeroGame.dir/src/Karakter.cpp.s: cmake_force
 CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o: CMakeFiles/HeroGame.dir/flags.make
 CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o: ../src/StandardFjendeFactory.cpp
 CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o: CMakeFiles/HeroGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o -MF CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o.d -o CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o -c /home/alex/SoftwarePortfolie/src/StandardFjendeFactory.cpp
 
 CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.s: cmake_force
 CMakeFiles/HeroGame.dir/src/Våben.cpp.o: CMakeFiles/HeroGame.dir/flags.make
 CMakeFiles/HeroGame.dir/src/Våben.cpp.o: ../src/Våben.cpp
 CMakeFiles/HeroGame.dir/src/Våben.cpp.o: CMakeFiles/HeroGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/HeroGame.dir/src/Våben.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/HeroGame.dir/src/Våben.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HeroGame.dir/src/Våben.cpp.o -MF CMakeFiles/HeroGame.dir/src/Våben.cpp.o.d -o CMakeFiles/HeroGame.dir/src/Våben.cpp.o -c /home/alex/SoftwarePortfolie/src/Våben.cpp
 
 CMakeFiles/HeroGame.dir/src/Våben.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/HeroGame.dir/src/Våben.cpp.s: cmake_force
 CMakeFiles/HeroGame.dir/src/main.cpp.o: CMakeFiles/HeroGame.dir/flags.make
 CMakeFiles/HeroGame.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/HeroGame.dir/src/main.cpp.o: CMakeFiles/HeroGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/HeroGame.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/HeroGame.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HeroGame.dir/src/main.cpp.o -MF CMakeFiles/HeroGame.dir/src/main.cpp.o.d -o CMakeFiles/HeroGame.dir/src/main.cpp.o -c /home/alex/SoftwarePortfolie/src/main.cpp
 
 CMakeFiles/HeroGame.dir/src/main.cpp.i: cmake_force
@@ -202,6 +216,7 @@ HeroGame_OBJECTS = \
 "CMakeFiles/HeroGame.dir/src/Grotte.cpp.o" \
 "CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o" \
 "CMakeFiles/HeroGame.dir/src/Hero.cpp.o" \
+"CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o" \
 "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o" \
 "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o" \
 "CMakeFiles/HeroGame.dir/src/Våben.cpp.o" \
@@ -215,13 +230,14 @@ HeroGame: CMakeFiles/HeroGame.dir/src/GameManager.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/Grotte.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/Hero.cpp.o
+HeroGame: CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/Karakter.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/Våben.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/src/main.cpp.o
 HeroGame: CMakeFiles/HeroGame.dir/build.make
 HeroGame: CMakeFiles/HeroGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable HeroGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alex/SoftwarePortfolie/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable HeroGame"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/HeroGame.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

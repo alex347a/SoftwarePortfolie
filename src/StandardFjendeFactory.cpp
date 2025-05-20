@@ -7,7 +7,7 @@ Fjende StandardFjendeFactory::skabFjende(int helteLevel) {
     string modifier;
     vector<string> passendeNavne;
 
-    // Vælg en passende modifier baseret på helteLevel
+    // Vaelg en passende modifier baseret paa helteLevel
     if (helteLevel <= 2) {
         modifier = "Weak";
     } else if (helteLevel <= 5) {
@@ -21,7 +21,7 @@ Fjende StandardFjendeFactory::skabFjende(int helteLevel) {
     int minXP = helteLevel * 100;
     int maxXP = helteLevel * 300;
 
-    // Find passende fjende navne baseret på helteLevel
+    // Find passende fjende navne baseret paa helteLevel
     for (const Fjende& f : fjendeListe) {
         if (f.hentXPGevinst() >= minXP && f.hentXPGevinst() <= maxXP) {
             passendeNavne.push_back(f.hentNavn());

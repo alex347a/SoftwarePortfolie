@@ -24,15 +24,12 @@ protected:
     bool eventyrMenu();
     void visInventarMenu();
 
-    int hentGyldigtTal(int min, int max);
-    bool erKunWhitespaces(const string& tekst);
-
-    void kæmpModFjende();
-    void kæmpModFjendeIGrotte(const Fjende& fjende);
+    void kaempModFjende();
+    void kaempModFjendeIGrotte(const Fjende& fjende);
     void visFjender() const;
-    Fjende vælgFjende();
+    Fjende vaelgFjende();
     void opretGrotter();
-    bool vælgOgGennemførGrotte();
+    bool vaelgOgGennemfoerGrotte();
 
     vector<Fjende> fjendeListe;
     vector<Hero> predefineredeHelte;

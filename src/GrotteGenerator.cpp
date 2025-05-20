@@ -26,13 +26,13 @@ string GrotteGenerator::lavGrotteNavn() {
 }
 
 int GrotteGenerator::bestemAntalFjender(int helteLevel) {
-    // Antallet af fjender afhænger af helteLevel
+    // Antallet af fjender afhaenger af helteLevel
     if (helteLevel <= 2) return rand() % 2 + 1;         // 1–2 fjender
     else if (helteLevel <= 5) return rand() % 3 + 2;    // 2–4 fjender
     else return rand() % 3 + 3;                         // 3–5 fjender
 }
 
-// Lav beregningen af guld om. Den skal være baseret på den totale mængde af xp der gives for alle fjenderne i grotten.
+// Lav beregningen af guld om. Den skal vaere baseret paa den totale maengde af xp der gives for alle fjenderne i grotten.
 int GrotteGenerator::beregnGuld(int helteLevel, int fjendeAntal) {
     return (helteLevel * 10) + (fjendeAntal * 20);
 }

@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alex/SoftwarePortfolie/src/Grotte.cpp" "CMakeFiles/HeroGame.dir/src/Grotte.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Grotte.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/GrotteGenerator.cpp" "CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Hero.cpp" "CMakeFiles/HeroGame.dir/src/Hero.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Hero.cpp.o.d"
+  "/home/alex/SoftwarePortfolie/src/Hjælpefunktioner.cpp" "CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Karakter.cpp" "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/StandardFjendeFactory.cpp" "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Våben.cpp" "CMakeFiles/HeroGame.dir/src/Våben.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Våben.cpp.o.d"

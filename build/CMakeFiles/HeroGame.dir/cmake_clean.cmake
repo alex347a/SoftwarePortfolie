@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/HeroGame.dir/src/GrotteGenerator.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/Hero.cpp.o"
   "CMakeFiles/HeroGame.dir/src/Hero.cpp.o.d"
+  "CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o"
+  "CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o"
   "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o"
