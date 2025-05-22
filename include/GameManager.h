@@ -5,6 +5,7 @@
 #include "Fjende.h"
 #include "Grotte.h"
 #include "GrotteGenerator.h"
+#include "VaabenSaelger.h"
 
 #include <vector>
 #include <memory>
@@ -23,6 +24,7 @@ protected:
     void loadHero();
     bool eventyrMenu();
     void visInventarMenu();
+    void visVaabenSaelgerMenu();
 
     void kaempModFjende();
     void kaempModFjendeIGrotte(const Fjende& fjende);

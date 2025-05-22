@@ -35,16 +35,10 @@ void GameManager::visHovedmenu() {
         switch (valg) {
             case 1:
                 nyHero();
-                aktivHero->tilfoejVaaben(Vaaben("Jernsvaerd", 5, 1, 20));
-                aktivHero->tilfoejVaaben(Vaaben("Hammer", 3, 2, 30));
-                aktivHero->tilfoejVaaben(Vaaben("Staaloekse", 8, 3, 15));
                 eventyrMenu();
                 break;
             case 2:
                 loadHero();
-                aktivHero->tilfoejVaaben(Vaaben("Jernsvaerd", 5, 1, 20));
-                aktivHero->tilfoejVaaben(Vaaben("Hammer", 3, 2, 30));
-                aktivHero->tilfoejVaaben(Vaaben("Staaloekse", 8, 3, 15));
                 eventyrMenu();
                 break;
             case 3:
@@ -126,10 +120,11 @@ bool GameManager::eventyrMenu() {
         cout << "1. Kaemp mod en fjende\n";
         cout << "2. Udforsk en grotte\n";
         cout << "3. Vis inventar\n";
-        cout << "4. Tilbage til hovedmenu\n";
+        cout << "4. Vaabensaelger\n";
+        cout << "5. Tilbage til hovedmenu\n";
         cout << "Valg: ";
         
-        valg = Hjaelpefunktioner::hentGyldigtTal(1, 4);
+        valg = Hjaelpefunktioner::hentGyldigtTal(1, 5);
 
         switch (valg) {
             case 1:
@@ -151,13 +146,19 @@ bool GameManager::eventyrMenu() {
                     return true;
                 }
             case 4:
+                visVaabenSaelgerMenu();
+                break;
+                if (!aktivHero->erILive()) {
+                    return true;
+                }
+            case 5:
                 cout << "Tilbage til hovedmenu...\n";
                 return true;
             default:
                 cout << "Ugyldigt valg. Proev igen.\n";
         }
 
-    } while (valg != 4 && aktivHero->erILive());
+    } while (valg != 5 && aktivHero->erILive());
     return true;
 }
 
@@ -426,6 +427,43 @@ void GameManager::visInventarMenu() {
                      << aktivHero->hentUdstyretVaaben()->hentNavn() << "!\n";
             } else {
                 cout << "Kunne ikke udstyre vaaben!\n";
+            }
+        }
+    } while (valg != 2);
+}
+
+void GameManager::visVaabenSaelgerMenu() {
+    if (!aktivHero) {
+        cout << "Ingen aktiv helt!\n";
+        return;
+    }
+
+    static VaabenSaelger vaabenSaelger("Jeff");
+    vaabenSaelger.fyldLager(aktivHero->hentLevel());
+
+    int valg;
+    do {
+        cout << "\n--- VÅBENHANDLER MENU ---\n";
+        cout << "Du har " << aktivHero->hentGuld() << " guld." << "\n\n";
+        
+        // Vis våbenudvalg med spillerns specifikke skadeværdier
+        vaabenSaelger.visLager(*aktivHero);
+
+        cout << "\n1. Køb våben\n"
+             << "2. Tilbage til eventyrmenu\n"
+             << "Valg: ";
+
+        valg = Hjaelpefunktioner::hentGyldigtTal(1, 2);
+
+        if (valg == 1) {
+            cout << "Vælg våben (1-" << vaabenSaelger.hentAntalVaaben() << ", 0 for at afbryde): ";
+            int valgAfVaaben = Hjaelpefunktioner::hentGyldigtTal(0, vaabenSaelger.hentAntalVaaben());
+            
+            if (valgAfVaaben > 0) {
+                vaabenSaelger.saelgVaaben(valgAfVaaben - 1, *aktivHero);
+            }
+            else {
+                cout << "Koeb af vaaben afbrudt.\n";
             }
         }
     } while (valg != 2);
