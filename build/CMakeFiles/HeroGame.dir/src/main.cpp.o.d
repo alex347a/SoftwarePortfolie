@@ -131,7 +131,7 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /home/alex/SoftwarePortfolie/include/Våben.h /usr/include/c++/11/vector \
+ /home/alex/SoftwarePortfolie/include/Vaaben.h /usr/include/c++/11/vector \
  /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
@@ -161,6 +161,7 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: \
  /home/alex/SoftwarePortfolie/include/Grotte.h \
  /home/alex/SoftwarePortfolie/include/GrotteGenerator.h \
  /home/alex/SoftwarePortfolie/include/FjendeFactory.h \
+ /home/alex/SoftwarePortfolie/include/VaabenSaelger.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \

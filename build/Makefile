@@ -249,29 +249,29 @@ src/Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.s
 .PHONY : src/Hero.cpp.s
 
-src/Hjælpefunktioner.o: src/Hjælpefunktioner.cpp.o
-.PHONY : src/Hjælpefunktioner.o
+src/Hjaelpefunktioner.o: src/Hjaelpefunktioner.cpp.o
+.PHONY : src/Hjaelpefunktioner.o
 
 # target to build an object file
-src/Hjælpefunktioner.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.o
-.PHONY : src/Hjælpefunktioner.cpp.o
+src/Hjaelpefunktioner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.o
+.PHONY : src/Hjaelpefunktioner.cpp.o
 
-src/Hjælpefunktioner.i: src/Hjælpefunktioner.cpp.i
-.PHONY : src/Hjælpefunktioner.i
+src/Hjaelpefunktioner.i: src/Hjaelpefunktioner.cpp.i
+.PHONY : src/Hjaelpefunktioner.i
 
 # target to preprocess a source file
-src/Hjælpefunktioner.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.i
-.PHONY : src/Hjælpefunktioner.cpp.i
+src/Hjaelpefunktioner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.i
+.PHONY : src/Hjaelpefunktioner.cpp.i
 
-src/Hjælpefunktioner.s: src/Hjælpefunktioner.cpp.s
-.PHONY : src/Hjælpefunktioner.s
+src/Hjaelpefunktioner.s: src/Hjaelpefunktioner.cpp.s
+.PHONY : src/Hjaelpefunktioner.s
 
 # target to generate assembly for a file
-src/Hjælpefunktioner.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjælpefunktioner.cpp.s
-.PHONY : src/Hjælpefunktioner.cpp.s
+src/Hjaelpefunktioner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.s
+.PHONY : src/Hjaelpefunktioner.cpp.s
 
 src/Karakter.o: src/Karakter.cpp.o
 .PHONY : src/Karakter.o
@@ -321,29 +321,53 @@ src/StandardFjendeFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.s
 .PHONY : src/StandardFjendeFactory.cpp.s
 
-src/Våben.o: src/Våben.cpp.o
-.PHONY : src/Våben.o
+src/Vaaben.o: src/Vaaben.cpp.o
+.PHONY : src/Vaaben.o
 
 # target to build an object file
-src/Våben.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.o
-.PHONY : src/Våben.cpp.o
+src/Vaaben.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Vaaben.cpp.o
+.PHONY : src/Vaaben.cpp.o
 
-src/Våben.i: src/Våben.cpp.i
-.PHONY : src/Våben.i
+src/Vaaben.i: src/Vaaben.cpp.i
+.PHONY : src/Vaaben.i
 
 # target to preprocess a source file
-src/Våben.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.i
-.PHONY : src/Våben.cpp.i
+src/Vaaben.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Vaaben.cpp.i
+.PHONY : src/Vaaben.cpp.i
 
-src/Våben.s: src/Våben.cpp.s
-.PHONY : src/Våben.s
+src/Vaaben.s: src/Vaaben.cpp.s
+.PHONY : src/Vaaben.s
 
 # target to generate assembly for a file
-src/Våben.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Våben.cpp.s
-.PHONY : src/Våben.cpp.s
+src/Vaaben.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Vaaben.cpp.s
+.PHONY : src/Vaaben.cpp.s
+
+src/VaabenSaelger.o: src/VaabenSaelger.cpp.o
+.PHONY : src/VaabenSaelger.o
+
+# target to build an object file
+src/VaabenSaelger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/VaabenSaelger.cpp.o
+.PHONY : src/VaabenSaelger.cpp.o
+
+src/VaabenSaelger.i: src/VaabenSaelger.cpp.i
+.PHONY : src/VaabenSaelger.i
+
+# target to preprocess a source file
+src/VaabenSaelger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/VaabenSaelger.cpp.i
+.PHONY : src/VaabenSaelger.cpp.i
+
+src/VaabenSaelger.s: src/VaabenSaelger.cpp.s
+.PHONY : src/VaabenSaelger.s
+
+# target to generate assembly for a file
+src/VaabenSaelger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/VaabenSaelger.cpp.s
+.PHONY : src/VaabenSaelger.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -393,18 +417,21 @@ help:
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
-	@echo "... src/Hjælpefunktioner.o"
-	@echo "... src/Hjælpefunktioner.i"
-	@echo "... src/Hjælpefunktioner.s"
+	@echo "... src/Hjaelpefunktioner.o"
+	@echo "... src/Hjaelpefunktioner.i"
+	@echo "... src/Hjaelpefunktioner.s"
 	@echo "... src/Karakter.o"
 	@echo "... src/Karakter.i"
 	@echo "... src/Karakter.s"
 	@echo "... src/StandardFjendeFactory.o"
 	@echo "... src/StandardFjendeFactory.i"
 	@echo "... src/StandardFjendeFactory.s"
-	@echo "... src/Våben.o"
-	@echo "... src/Våben.i"
-	@echo "... src/Våben.s"
+	@echo "... src/Vaaben.o"
+	@echo "... src/Vaaben.i"
+	@echo "... src/Vaaben.s"
+	@echo "... src/VaabenSaelger.o"
+	@echo "... src/VaabenSaelger.i"
+	@echo "... src/VaabenSaelger.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

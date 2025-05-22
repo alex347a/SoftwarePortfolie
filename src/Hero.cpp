@@ -20,6 +20,10 @@ int Hero::hentGuld() const {
     return guld;
 }
 
+int Hero::hentStyrke() const {
+    return styrke;
+}
+
 int Hero::hentSkadeMedVaaben() const {
     if (aktivVaaben && !aktivVaaben->erOedelagt()) {
         return aktivVaaben->hentTotalStyrke(styrke);

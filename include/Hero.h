@@ -18,6 +18,7 @@ public:
     int hentLevel() const;
     int hentXP() const;
     int hentGuld() const;
+    int hentStyrke() const;
     int hentSkadeMedVaaben() const;
     int hentAntalVaaben() const;
 
