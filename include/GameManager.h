@@ -12,7 +12,8 @@
 
 using namespace std;
 
-class GameManager {
+class GameManager
+{
 public:
     GameManager();
     void start();
@@ -27,7 +28,7 @@ protected:
     void visVaabenSaelgerMenu();
 
     void kaempModFjende();
-    void kaempModFjendeIGrotte(const Fjende& fjende);
+    void kaempModFjendeIGrotte(const Fjende &fjende);
     void visFjender() const;
     Fjende vaelgFjende();
     void opretGrotter();
@@ -37,9 +38,9 @@ protected:
     vector<Hero> predefineredeHelte;
 
     vector<Grotte> grotterne;
-    GrotteGenerator* grottegren;
-    
-    Hero* aktivHero;
+    GrotteGenerator *grottegren;
+
+    Hero *aktivHero;
 
     void opretFjender();
     void opretPredefineredeHelte();

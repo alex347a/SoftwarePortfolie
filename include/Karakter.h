@@ -5,11 +5,12 @@
 
 using namespace std;
 
-class Karakter {
+class Karakter
+{
 public:
     Karakter();
     Karakter(string navn, int maxHP, int hp, int styrke);
-    
+
     string hentNavn() const;
     int hentMaxHP() const;
     int hentHP() const;
@@ -25,7 +26,6 @@ protected:
     int maxHP;
     int hp;
     int styrke;
-
 };
 
 #endif

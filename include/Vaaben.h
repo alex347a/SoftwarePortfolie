@@ -5,10 +5,11 @@
 
 using namespace std;
 
-class Vaaben {
+class Vaaben
+{
 public:
     Vaaben(string navn, int baseStyrke, int skaleringsFaktor, int holdbarhed);
-    
+
     string hentNavn() const;
     int hentTotalStyrke(int heroBaseStyrke) const;
     int hentNuvaerendeHoldbarhed() const;
@@ -17,7 +18,7 @@ public:
 
     void brug();
     bool erOedelagt() const;
-    
+
 private:
     string navn;
     int baseStyrke;

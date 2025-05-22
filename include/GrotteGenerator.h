@@ -8,14 +8,15 @@
 
 using namespace std;
 
-class GrotteGenerator {
+class GrotteGenerator
+{
 public:
-    GrotteGenerator(FjendeFactory* factory);
+    GrotteGenerator(FjendeFactory *factory);
 
     vector<Grotte> genererGrotter(int helteLevel, int antal);
 
 private:
-    FjendeFactory* fjendeFactory;
+    FjendeFactory *fjendeFactory;
 
     string lavGrotteNavn();
     int bestemAntalFjender(int helteLevel);

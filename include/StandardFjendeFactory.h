@@ -8,9 +8,10 @@
 
 using namespace std;
 
-class StandardFjendeFactory : public FjendeFactory {
+class StandardFjendeFactory : public FjendeFactory
+{
 public:
-    StandardFjendeFactory(const vector<Fjende>& fjender);
+    StandardFjendeFactory(const vector<Fjende> &fjender);
 
     Fjende skabFjende(int helteLevel) override;
     vector<Fjende> skabFjender(int helteLevel, int antal) override;
@@ -18,8 +19,8 @@ public:
     ~StandardFjendeFactory();
 
 private:
-    Fjende lavFjendeMedModifier(const string& fjendeNavn, const string& modifier);
-    
+    Fjende lavFjendeMedModifier(const string &fjendeNavn, const string &modifier);
+
     vector<Fjende> fjendeListe;
     vector<string> fjendeNavn;
     vector<string> styrkeModifiers;

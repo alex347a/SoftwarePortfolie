@@ -10,7 +10,8 @@
 
 using namespace std;
 
-class Hero : public Karakter {
+class Hero : public Karakter
+{
 public:
     Hero(string navn);
     Hero(string navn, int maxHP, int hp, int styrke, int xp, int level, int guld);
@@ -26,21 +27,21 @@ public:
     void givXP(int xpMaengde);
     void givGuld(int guldMaengde);
     void tilfoejVaaben(Vaaben Vaaben);
-    void setAktivVaaben(Vaaben* Vaaben);
+    void setAktivVaaben(Vaaben *Vaaben);
     void visInventar() const;
     void brugAktivVaaben();
 
     bool levelOp();
     bool udstyrMedVaabenFraIndex(int index);
 
-    const Vaaben* hentUdstyretVaaben() const;
-    
+    const Vaaben *hentUdstyretVaaben() const;
+
 private:
     int xp;
     int level;
     int guld;
     vector<Vaaben> inventar;
-    Vaaben* aktivVaaben;
+    Vaaben *aktivVaaben;
 };
 
 #endif

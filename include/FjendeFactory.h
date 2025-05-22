@@ -7,12 +7,13 @@
 
 using namespace std;
 
-class FjendeFactory {
+class FjendeFactory
+{
 public:
     virtual Fjende skabFjende(int helteLevel) = 0;
     virtual vector<Fjende> skabFjender(int helteLevel, int antal) = 0;
-    
+
     virtual ~FjendeFactory() = default;
 };
-    
+
 #endif

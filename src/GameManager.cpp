@@ -8,7 +8,8 @@
 
 using namespace std;
 
-GameManager::GameManager() {
+GameManager::GameManager()
+{
     opretFjender();
     opretPredefineredeHelte();
 
@@ -16,80 +17,91 @@ GameManager::GameManager() {
     grottegren = nullptr;
 }
 
-void GameManager::start() {
+void GameManager::start()
+{
     visHovedmenu();
 }
 
-void GameManager::visHovedmenu() {
+void GameManager::visHovedmenu()
+{
     int valg;
 
-    do {
+    do
+    {
         cout << "\n--- HOVEDMENU ---\n";
         cout << "1. Opret ny helt\n";
         cout << "2. Vaelg eksisterende helt\n";
         cout << "3. Afslut\n";
         cout << "Valg: ";
-        
+
         valg = Hjaelpefunktioner::hentGyldigtTal(1, 3);
 
-        switch (valg) {
-            case 1:
-                nyHero();
-                eventyrMenu();
-                break;
-            case 2:
-                loadHero();
-                eventyrMenu();
-                break;
-            case 3:
-                cout << "Spillet afsluttes...\n";
-                break;
-            default:
-                cout << "Ugyldigt valg. Proev igen.\n";
+        switch (valg)
+        {
+        case 1:
+            nyHero();
+            eventyrMenu();
+            break;
+        case 2:
+            loadHero();
+            eventyrMenu();
+            break;
+        case 3:
+            cout << "Spillet afsluttes...\n";
+            break;
+        default:
+            cout << "Ugyldigt valg. Proev igen.\n";
         }
 
     } while (valg != 3);
 }
 
-void GameManager::nyHero() {
+void GameManager::nyHero()
+{
     string navn;
     bool gyldigtNavn = false;
 
-    while (!gyldigtNavn) {
+    while (!gyldigtNavn)
+    {
         cout << "Indtast navn paa ny helt: ";
         getline(cin, navn);
 
         bool eksistererAllerede = false;
-        for (size_t i = 0; i < predefineredeHelte.size(); ++i) {
-        const Hero& h = predefineredeHelte[i];
-        if (navn == h.hentNavn()) {
+        for (size_t i = 0; i < predefineredeHelte.size(); ++i)
+        {
+            const Hero &h = predefineredeHelte[i];
+            if (navn == h.hentNavn())
+            {
                 eksistererAllerede = true;
                 break;
             }
         }
 
-        if (eksistererAllerede) {
+        if (eksistererAllerede)
+        {
             cout << "Navnet findes allerede. Proev et andet.\n";
-        } else {
+        }
+        else
+        {
             gyldigtNavn = true;
         }
     }
-
 
     aktivHero = new Hero(navn);
     cout << "Ny helt oprettet: " << aktivHero->hentNavn() << endl;
 }
 
-
-void GameManager::loadHero() {
+void GameManager::loadHero()
+{
     cout << "--- Vaelg en eksisterende helt ---\n";
-    for (size_t i = 0; i < predefineredeHelte.size(); ++i) {
-        cout << i + 1 << ". " << predefineredeHelte[i].hentNavn() 
-        << " HP: " << predefineredeHelte[i].hentMaxHP() 
-        << ", Styrke: " << predefineredeHelte[i].hentStyrke() 
-        << ", Level: " << predefineredeHelte[i].hentLevel()
-        << ", Guld: " << predefineredeHelte[i].hentGuld()
-        << endl;
+    for (size_t i = 0; i < predefineredeHelte.size(); ++i)
+    {
+        cout << i + 1 << ". " << predefineredeHelte[i].hentNavn()
+             << " HP: " << predefineredeHelte[i].hentMaxHP()
+             << ", Styrke: " << predefineredeHelte[i].hentStyrke()
+             << ", Level: " << predefineredeHelte[i].hentLevel()
+             << ", Guld: " << predefineredeHelte[i].hentGuld()
+             << endl;
     }
 
     cout << "Valg: ";
@@ -99,23 +111,27 @@ void GameManager::loadHero() {
     cout << "Helt valgt: " << aktivHero->hentNavn() << endl;
 }
 
-void GameManager::opretGrotter() {
-    if (!aktivHero) {
+void GameManager::opretGrotter()
+{
+    if (!aktivHero)
+    {
         cout << "Kan ikke oprette grotter uden en aktiv helt.\n";
         return;
     }
 
-    if (!grottegren) {
+    if (!grottegren)
+    {
         grottegren = new GrotteGenerator(new StandardFjendeFactory(fjendeListe));
     }
     grotterne = grottegren->genererGrotter(aktivHero->hentLevel(), aktivHero->hentLevel());
 }
 
-
-bool GameManager::eventyrMenu() {
+bool GameManager::eventyrMenu()
+{
     int valg;
 
-    do {
+    do
+    {
         cout << "\n--- EVENTYR MENU ---\n";
         cout << "1. Kaemp mod en fjende\n";
         cout << "2. Udforsk en grotte\n";
@@ -123,91 +139,109 @@ bool GameManager::eventyrMenu() {
         cout << "4. Vaabensaelger\n";
         cout << "5. Tilbage til hovedmenu\n";
         cout << "Valg: ";
-        
+
         valg = Hjaelpefunktioner::hentGyldigtTal(1, 5);
 
-        switch (valg) {
-            case 1:
-                kaempModFjende();
-                if (!aktivHero->erILive()) {
-                    return true;
-                }
-                break;
-            case 2:
-                opretGrotter();
-                if (vaelgOgGennemfoerGrotte()) {
-                    return true;
-                }
-                break;
-            case 3:
-                visInventarMenu(); 
-                break;
-                if (!aktivHero->erILive()) {
-                    return true;
-                }
-            case 4:
-                visVaabenSaelgerMenu();
-                break;
-                if (!aktivHero->erILive()) {
-                    return true;
-                }
-            case 5:
-                cout << "Tilbage til hovedmenu...\n";
+        switch (valg)
+        {
+        case 1:
+            kaempModFjende();
+            if (!aktivHero->erILive())
+            {
                 return true;
-            default:
-                cout << "Ugyldigt valg. Proev igen.\n";
+            }
+            break;
+        case 2:
+            opretGrotter();
+            if (vaelgOgGennemfoerGrotte())
+            {
+                return true;
+            }
+            break;
+        case 3:
+            visInventarMenu();
+            break;
+            if (!aktivHero->erILive())
+            {
+                return true;
+            }
+        case 4:
+            visVaabenSaelgerMenu();
+            break;
+            if (!aktivHero->erILive())
+            {
+                return true;
+            }
+        case 5:
+            cout << "Tilbage til hovedmenu...\n";
+            return true;
+        default:
+            cout << "Ugyldigt valg. Proev igen.\n";
         }
 
     } while (valg != 5 && aktivHero->erILive());
     return true;
 }
 
-void GameManager::kaempModFjende() {
+void GameManager::kaempModFjende()
+{
     Fjende fjende = vaelgFjende();
     cout << "--- KAMP ---\n";
     cout << aktivHero->hentNavn() << " kaemper mod " << fjende.hentNavn() << "!\n\n";
-    
-    cout << aktivHero->hentNavn() << " har\n" 
-    << "HP: " << aktivHero->hentHP() << "\n";
-    
-    if (aktivHero->hentUdstyretVaaben()) {
+
+    cout << aktivHero->hentNavn() << " har\n"
+         << "HP: " << aktivHero->hentHP() << "\n";
+
+    if (aktivHero->hentUdstyretVaaben())
+    {
         cout << "Vaaben: " << aktivHero->hentUdstyretVaaben()->hentNavn() << " (" << aktivHero->hentUdstyretVaaben()->hentNuvaerendeHoldbarhed() << "/" << aktivHero->hentUdstyretVaaben()->hentMaxHoldbarhed() << ")\n"
-        << "Skade:" << aktivHero->hentSkadeMedVaaben() << "\n\n";
+             << "Skade:" << aktivHero->hentSkadeMedVaaben() << "\n\n";
         aktivHero->brugAktivVaaben();
-    } else {
-        cout << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    }
+    else
+    {
+        cout << "styrke: " << fjende.hentStyrke() << "\n\n";
     }
 
-    cout << fjende.hentNavn() << " har\n" 
-    << "HP: " << fjende.hentHP() << "\n"
-    << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    cout << fjende.hentNavn() << " har\n"
+         << "HP: " << fjende.hentHP() << "\n"
+         << "styrke: " << fjende.hentStyrke() << "\n\n";
 
-    while (aktivHero->erILive() && fjende.erILive()) {
+    while (aktivHero->erILive() && fjende.erILive())
+    {
         cout << "Tryk paa ENTER for at angribe!\n";
 
         string input;
         getline(cin, input);
-        if (input.empty()) {
+        if (input.empty())
+        {
             cout << aktivHero->hentNavn() << " rammer " << fjende.hentNavn() << " for ";
-            if (aktivHero->hentUdstyretVaaben()) {
+            if (aktivHero->hentUdstyretVaaben())
+            {
                 cout << aktivHero->hentSkadeMedVaaben() << " skade!\n";
                 fjende.tagSkade(aktivHero->hentSkadeMedVaaben());
-            } else {
+            }
+            else
+            {
                 cout << aktivHero->hentStyrke() << " skade!\n";
                 fjende.tagSkade(aktivHero->hentStyrke());
             }
-        } else {
+        }
+        else
+        {
             cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
         }
 
-        if (fjende.hentNavn() == "Dragon" && !fjende.erILive()) {
+        if (fjende.hentNavn() == "Dragon" && !fjende.erILive())
+        {
             cout << "Du besejrede dragen! Du har vundet spillet!\n";
             cout << "Tillykke, " << aktivHero->hentNavn() << "!\n";
             cout << "Forlader spillet...\n";
             exit(0);
         }
 
-        if (!fjende.erILive()) {
+        if (!fjende.erILive())
+        {
             break;
         }
 
@@ -216,82 +250,99 @@ void GameManager::kaempModFjende() {
 
         aktivHero->tagSkade(fjende.hentStyrke());
 
-        if (!aktivHero->erILive()) {
+        if (!aktivHero->erILive())
+        {
             break;
         }
 
         cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n\n";
-        
     }
 
-    if (aktivHero->erILive()) {
+    if (aktivHero->erILive())
+    {
         aktivHero->givFuldHP();
         // Murloc faar double XP
-        if (aktivHero->hentNavn() == "Murloc") {
-            cout << aktivHero->hentNavn() << " vandt og faar double XP! " << aktivHero->hentNavn() << " faar derfor " << fjende.hentXPGevinst()*2 << " XP!\n";
-            aktivHero->givXP(fjende.hentXPGevinst()*2);
-        } else {
+        if (aktivHero->hentNavn() == "Murloc")
+        {
+            cout << aktivHero->hentNavn() << " vandt og faar double XP! " << aktivHero->hentNavn() << " faar derfor " << fjende.hentXPGevinst() * 2 << " XP!\n";
+            aktivHero->givXP(fjende.hentXPGevinst() * 2);
+        }
+        else
+        {
             cout << aktivHero->hentNavn() << " vandt og faar " << fjende.hentXPGevinst() << " XP!\n";
             aktivHero->givXP(fjende.hentXPGevinst());
         }
-        
-        while (aktivHero->levelOp()) {
+
+        while (aktivHero->levelOp())
+        {
             aktivHero->givFuldHP();
             cout << "Du er steget i level!\n";
             cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
             cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
             cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
-            
         }
         cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
-
-    } else {
+    }
+    else
+    {
         cout << aktivHero->hentNavn() << " doede i kampen...\n";
     }
 }
 
 // Denne funktion er naesten identisk med kaempModFjende, men den tager en fjende som parameter
 // og kaemper mod den i stedet for at vaelge en fra listen.
-void GameManager::kaempModFjendeIGrotte(const Fjende& fjende) {
+void GameManager::kaempModFjendeIGrotte(const Fjende &fjende)
+{
     Fjende kopi = fjende;
 
     cout << "--- GROTTEKAMP ---\n";
     cout << aktivHero->hentNavn() << " kaemper mod " << kopi.hentNavn() << "!\n\n";
-    
-    cout << aktivHero->hentNavn() << " har\n" 
-    << "HP: " << aktivHero->hentHP() << "\n";
-    
-    if (aktivHero->hentUdstyretVaaben()) {
+
+    cout << aktivHero->hentNavn() << " har\n"
+         << "HP: " << aktivHero->hentHP() << "\n";
+
+    if (aktivHero->hentUdstyretVaaben())
+    {
         cout << "Vaaben: " << aktivHero->hentUdstyretVaaben()->hentNavn() << " (" << aktivHero->hentUdstyretVaaben()->hentNuvaerendeHoldbarhed() << "/" << aktivHero->hentUdstyretVaaben()->hentMaxHoldbarhed() << ")\n"
-        << "Skade:" << aktivHero->hentSkadeMedVaaben() << "\n\n";
+             << "Skade:" << aktivHero->hentSkadeMedVaaben() << "\n\n";
         aktivHero->brugAktivVaaben();
-    } else {
-        cout << "styrke: "<< fjende.hentStyrke() << "\n\n";
+    }
+    else
+    {
+        cout << "styrke: " << fjende.hentStyrke() << "\n\n";
     }
 
-    cout << kopi.hentNavn() << " har\n" 
-    << "HP: " << kopi.hentHP() << "\n"
-    << "styrke: "<< kopi.hentStyrke() << "\n\n";
-    
-    while (aktivHero->erILive() && kopi.erILive()) {
+    cout << kopi.hentNavn() << " har\n"
+         << "HP: " << kopi.hentHP() << "\n"
+         << "styrke: " << kopi.hentStyrke() << "\n\n";
+
+    while (aktivHero->erILive() && kopi.erILive())
+    {
         cout << "Tryk paa ENTER for at angribe!\n";
 
         string input;
         getline(cin, input);
-        if (input.empty()) {
+        if (input.empty())
+        {
             cout << aktivHero->hentNavn() << " rammer " << kopi.hentNavn() << " for ";
-            if (aktivHero->hentUdstyretVaaben()) {
+            if (aktivHero->hentUdstyretVaaben())
+            {
                 cout << aktivHero->hentSkadeMedVaaben() << " skade!\n";
                 kopi.tagSkade(aktivHero->hentSkadeMedVaaben());
-            } else {
+            }
+            else
+            {
                 cout << aktivHero->hentStyrke() << " skade!\n";
                 kopi.tagSkade(aktivHero->hentStyrke());
             }
-        } else {
+        }
+        else
+        {
             cout << aktivHero->hentNavn() << " fumler og rammer ikke!\n";
         }
 
-        if (!kopi.erILive()) {
+        if (!kopi.erILive())
+        {
             break;
         }
 
@@ -300,49 +351,57 @@ void GameManager::kaempModFjendeIGrotte(const Fjende& fjende) {
 
         aktivHero->tagSkade(kopi.hentStyrke());
 
-        if (!aktivHero->erILive()) {
+        if (!aktivHero->erILive())
+        {
             break;
         }
 
         cout << aktivHero->hentNavn() << " har " << aktivHero->hentHP() << " HP tilbage.\n\n";
-        
     }
 
-    if (aktivHero->erILive()) {
+    if (aktivHero->erILive())
+    {
         aktivHero->givFuldHP();
         // Murloc faar double XP
-        if (aktivHero->hentNavn() == "Murloc") {
-            cout << aktivHero->hentNavn() << " vandt og faar double XP! " << aktivHero->hentNavn() << " faar derfor " << fjende.hentXPGevinst()*2 << " XP!\n";
-            aktivHero->givXP(kopi.hentXPGevinst()*2);
-        } else {
+        if (aktivHero->hentNavn() == "Murloc")
+        {
+            cout << aktivHero->hentNavn() << " vandt og faar double XP! " << aktivHero->hentNavn() << " faar derfor " << fjende.hentXPGevinst() * 2 << " XP!\n";
+            aktivHero->givXP(kopi.hentXPGevinst() * 2);
+        }
+        else
+        {
             cout << aktivHero->hentNavn() << " vandt og faar " << kopi.hentXPGevinst() << " XP!\n";
             aktivHero->givXP(kopi.hentXPGevinst());
         }
-        
-        if (aktivHero->levelOp()) {
+
+        if (aktivHero->levelOp())
+        {
             aktivHero->givFuldHP();
             cout << "Du er steget i level!\n";
             cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
             cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
             cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
-            
         }
         cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
-
-    } else {
+    }
+    else
+    {
         cout << aktivHero->hentNavn() << " doede i kampen...\n";
     }
 }
 
-void GameManager::visFjender() const {
-    for (size_t i = 0; i < fjendeListe.size(); ++i) {
+void GameManager::visFjender() const
+{
+    for (size_t i = 0; i < fjendeListe.size(); ++i)
+    {
         cout << i + 1 << ". " << fjendeListe[i].hentNavn() << " (HP: "
              << fjendeListe[i].hentMaxHP() << ", Styrke: "
              << fjendeListe[i].hentStyrke() << ")\n";
     }
 }
 
-Fjende GameManager::vaelgFjende() {
+Fjende GameManager::vaelgFjende()
+{
     cout << "--- Vaelg en fjende ---\n";
     visFjender();
     int valg;
@@ -350,7 +409,8 @@ Fjende GameManager::vaelgFjende() {
     return fjendeListe[valg - 1];
 }
 
-void GameManager::opretFjender() {
+void GameManager::opretFjender()
+{
     fjendeListe.push_back(Fjende("Wolf Cub", 4, 4, 1, 100));
     fjendeListe.push_back(Fjende("Young Forest Wolf", 4, 4, 2, 200));
     fjendeListe.push_back(Fjende("Feronius the Ferocious", 8, 8, 3, 400));
@@ -362,29 +422,36 @@ void GameManager::opretFjender() {
     fjendeListe.push_back(Fjende("Dragon", 100, 100, 10, 3000));
 }
 
-bool GameManager::vaelgOgGennemfoerGrotte() {
+bool GameManager::vaelgOgGennemfoerGrotte()
+{
     cout << "--- Vaelg en grotte ---\n";
-    for (size_t i = 0; i < grotterne.size(); ++i) {
+    for (size_t i = 0; i < grotterne.size(); ++i)
+    {
         cout << i + 1 << ": " << grotterne[i].hentNavn() << " (Guld: " << grotterne[i].hentGuld() << ")\n";
 
-    cout << "   Fjender: ";
-        const vector<Fjende>& fjender = grotterne[i].hentFjender();
-        for (size_t j = 0; j < fjender.size(); ++j) {
+        cout << "   Fjender: ";
+        const vector<Fjende> &fjender = grotterne[i].hentFjender();
+        for (size_t j = 0; j < fjender.size(); ++j)
+        {
             cout << fjender[j].hentNavn();
-            if (j != fjender.size() - 1) {
+            if (j != fjender.size() - 1)
+            {
                 cout << ",\n            ";
             }
         }
-        cout << endl << endl;
+        cout << endl
+             << endl;
     }
 
     int valg = Hjaelpefunktioner::hentGyldigtTal(1, grotterne.size());
     Grotte valgt = grotterne[valg - 1];
 
-    for (Fjende fjende : valgt.hentFjender()) {
+    for (Fjende fjende : valgt.hentFjender())
+    {
         cout << "Du moeder: " << fjende.hentNavn() << "\n";
         kaempModFjendeIGrotte(fjende);
-        if (!aktivHero->erILive()) {
+        if (!aktivHero->erILive())
+        {
             cout << "Du er doed og kan ikke fortsaette eventyret.\n";
             return true;
         }
@@ -392,25 +459,29 @@ bool GameManager::vaelgOgGennemfoerGrotte() {
 
     aktivHero->givGuld(valgt.hentGuld());
     cout << "Du har gennemfoert " << valgt.hentNavn() << " og faar " << valgt.hentGuld() << " guld!\n";
-    cout << "Du har nu " << aktivHero->hentGuld() << " guld.\n"; 
+    cout << "Du har nu " << aktivHero->hentGuld() << " guld.\n";
 
     // Rydder alle grotter saadan at der dannes nye grotter naeste gang
     grotterne.clear();
-    
+
     return false;
 }
 
-void GameManager::visInventarMenu() {
+void GameManager::visInventarMenu()
+{
     int valg;
-    if (!aktivHero) {
+    if (!aktivHero)
+    {
         cout << "Ingen aktiv helt!\n";
         return;
     }
-    else if (aktivHero->hentAntalVaaben() == 0) {
+    else if (aktivHero->hentAntalVaaben() == 0)
+    {
         cout << "Ingen vaaben i inventar!\n";
         return;
-    } 
-    do {
+    }
+    do
+    {
         aktivHero->visInventar();
         cout << "\n1. Udstyr vaaben\n"
              << "2. Tilbage til eventyrmenu\n"
@@ -418,22 +489,28 @@ void GameManager::visInventarMenu() {
 
         valg = Hjaelpefunktioner::hentGyldigtTal(1, 2);
 
-        if (valg == 1) {
+        if (valg == 1)
+        {
             cout << "Vaelg vaaben (1-" << aktivHero->hentAntalVaaben() << "): ";
             int valgAfVaaben = Hjaelpefunktioner::hentGyldigtTal(1, aktivHero->hentAntalVaaben());
 
-            if (aktivHero->udstyrMedVaabenFraIndex(valgAfVaaben - 1)) {
-                cout << "Du har nu udstyret " 
+            if (aktivHero->udstyrMedVaabenFraIndex(valgAfVaaben - 1))
+            {
+                cout << "Du har nu udstyret "
                      << aktivHero->hentUdstyretVaaben()->hentNavn() << "!\n";
-            } else {
+            }
+            else
+            {
                 cout << "Kunne ikke udstyre vaaben!\n";
             }
         }
     } while (valg != 2);
 }
 
-void GameManager::visVaabenSaelgerMenu() {
-    if (!aktivHero) {
+void GameManager::visVaabenSaelgerMenu()
+{
+    if (!aktivHero)
+    {
         cout << "Ingen aktiv helt!\n";
         return;
     }
@@ -442,10 +519,11 @@ void GameManager::visVaabenSaelgerMenu() {
     vaabenSaelger.fyldLager(aktivHero->hentLevel());
 
     int valg;
-    do {
+    do
+    {
         cout << "\n--- VÅBENHANDLER MENU ---\n";
         cout << "Du har " << aktivHero->hentGuld() << " guld." << "\n\n";
-        
+
         // Vis våbenudvalg med spillerns specifikke skadeværdier
         vaabenSaelger.visLager(*aktivHero);
 
@@ -455,29 +533,33 @@ void GameManager::visVaabenSaelgerMenu() {
 
         valg = Hjaelpefunktioner::hentGyldigtTal(1, 2);
 
-        if (valg == 1) {
+        if (valg == 1)
+        {
             cout << "Vælg våben (1-" << vaabenSaelger.hentAntalVaaben() << ", 0 for at afbryde): ";
             int valgAfVaaben = Hjaelpefunktioner::hentGyldigtTal(0, vaabenSaelger.hentAntalVaaben());
-            
-            if (valgAfVaaben > 0) {
+
+            if (valgAfVaaben > 0)
+            {
                 vaabenSaelger.saelgVaaben(valgAfVaaben - 1, *aktivHero);
             }
-            else {
+            else
+            {
                 cout << "Koeb af vaaben afbrudt.\n";
             }
         }
     } while (valg != 2);
 }
 
-
-void GameManager::opretPredefineredeHelte() {
+void GameManager::opretPredefineredeHelte()
+{
     predefineredeHelte.push_back(Hero("Murloc", 4, 4, 1, 0, 1, 0));
     predefineredeHelte.push_back(Hero("Thor", 14, 14, 4, 0, 4, 0));
     predefineredeHelte.push_back(Hero("Loke", 8, 8, 6, 0, 3, 0));
     predefineredeHelte.push_back(Hero("Odin", 18, 18, 3, 0, 5, 0));
 }
 
-GameManager::~GameManager() {
+GameManager::~GameManager()
+{
     delete aktivHero;
     delete grottegren;
 }

@@ -7,14 +7,15 @@
 
 using namespace std;
 
-class Grotte {
+class Grotte
+{
 public:
     Grotte();
     Grotte(string navn, int guld, vector<Fjende> fjender);
 
-    const string& hentNavn() const;
+    const string &hentNavn() const;
     int hentGuld() const;
-    const vector<Fjende>& hentFjender() const;
+    const vector<Fjende> &hentFjender() const;
 
     ~Grotte();
 

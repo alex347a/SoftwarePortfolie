@@ -12,10 +12,12 @@ int Karakter::hentMaxHP() const { return maxHP; }
 int Karakter::hentHP() const { return hp; }
 int Karakter::hentStyrke() const { return styrke; }
 
-void Karakter::tagSkade(int maengde) {
+void Karakter::tagSkade(int maengde)
+{
     hp -= maengde;
 }
 
-bool Karakter::erILive() const {
+bool Karakter::erILive() const
+{
     return hp > 0;
 }

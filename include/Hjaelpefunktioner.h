@@ -7,7 +7,8 @@
 
 using namespace std;
 
-class Hjaelpefunktioner {
+class Hjaelpefunktioner
+{
 public:
     static int hentGyldigtTal(int min, int max);
 };

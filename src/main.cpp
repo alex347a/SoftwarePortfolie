@@ -3,7 +3,8 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
     GameManager spil;
     spil.start();
     return 0;
