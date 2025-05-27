@@ -36,10 +36,15 @@ public:
 
     const Vaaben *hentUdstyretVaaben() const;
 
+    void setDatabaseId(int id); 
+    int getDatabaseId() const;
+
 private:
     int xp;
     int level;
     int guld;
+    int id;
+
     vector<Vaaben> inventar;
     Vaaben *aktivVaaben;
 };

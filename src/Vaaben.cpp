@@ -10,6 +10,16 @@ string Vaaben::hentNavn() const
     return navn;
 }
 
+int Vaaben::hentBaseStyrke() const
+{
+    return baseStyrke;
+}
+
+int Vaaben::hentSkaleringsFaktor() const
+{
+    return skaleringsFaktor;
+}
+
 int Vaaben::hentTotalStyrke(int heroBaseStyrke) const
 {
     return baseStyrke + skaleringsFaktor * heroBaseStyrke;
@@ -23,6 +33,23 @@ int Vaaben::hentNuvaerendeHoldbarhed() const
 int Vaaben::hentMaxHoldbarhed() const
 {
     return maxHoldbarhed;
+}
+
+int Vaaben::setNuvaerendeHoldbarhed(int holdbarhed)
+{
+    if (holdbarhed < 0)
+    {
+        nuvaerendeHoldbarhed = 0;
+    }
+    else if (holdbarhed > maxHoldbarhed)
+    {
+        nuvaerendeHoldbarhed = maxHoldbarhed;
+    }
+    else
+    {
+        nuvaerendeHoldbarhed = holdbarhed;
+    }
+    return nuvaerendeHoldbarhed;
 }
 
 void Vaaben::brug()

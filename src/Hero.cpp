@@ -130,3 +130,13 @@ const Vaaben *Hero::hentUdstyretVaaben() const
 {
     return aktivVaaben;
 }
+
+void Hero::setDatabaseId(int id)
+{
+    this->id = id;
+}
+
+int Hero::getDatabaseId() const
+{
+    return id;
+}
