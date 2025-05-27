@@ -129,6 +129,30 @@ HeroGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/build
 .PHONY : HeroGame/fast
 
+src/DatabaseManager.o: src/DatabaseManager.cpp.o
+.PHONY : src/DatabaseManager.o
+
+# target to build an object file
+src/DatabaseManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.o
+.PHONY : src/DatabaseManager.cpp.o
+
+src/DatabaseManager.i: src/DatabaseManager.cpp.i
+.PHONY : src/DatabaseManager.i
+
+# target to preprocess a source file
+src/DatabaseManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.i
+.PHONY : src/DatabaseManager.cpp.i
+
+src/DatabaseManager.s: src/DatabaseManager.cpp.s
+.PHONY : src/DatabaseManager.s
+
+# target to generate assembly for a file
+src/DatabaseManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.s
+.PHONY : src/DatabaseManager.cpp.s
+
 src/Fjende.o: src/Fjende.cpp.o
 .PHONY : src/Fjende.o
 
@@ -402,6 +426,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HeroGame"
+	@echo "... src/DatabaseManager.o"
+	@echo "... src/DatabaseManager.i"
+	@echo "... src/DatabaseManager.s"
 	@echo "... src/Fjende.o"
 	@echo "... src/Fjende.i"
 	@echo "... src/Fjende.s"

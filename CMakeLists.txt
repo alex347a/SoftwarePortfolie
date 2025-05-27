@@ -3,6 +3,8 @@ project(HeroGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(SQLite3 REQUIRED)
+
 # Compiler warnings configuration
 if(MSVC)
     add_compile_options(/W4 /WX /permissive-)
@@ -10,6 +12,7 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic)
     add_compile_options(-Wconversion -Wsign-conversion)
 endif()
+
 
 include_directories(include)
 
@@ -30,3 +33,5 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         target_compile_options(HeroGame PRIVATE -g3)
     endif()
 endif()
+
+target_link_libraries(HeroGame PRIVATE SQLite::SQLite3)

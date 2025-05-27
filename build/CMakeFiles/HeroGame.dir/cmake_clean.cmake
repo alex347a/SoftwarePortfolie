@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.o"
+  "CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/Fjende.cpp.o"
   "CMakeFiles/HeroGame.dir/src/Fjende.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/GameManager.cpp.o"
