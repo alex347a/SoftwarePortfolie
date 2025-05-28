@@ -273,6 +273,30 @@ src/Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hero.cpp.s
 .PHONY : src/Hero.cpp.s
 
+src/HeroRepository.o: src/HeroRepository.cpp.o
+.PHONY : src/HeroRepository.o
+
+# target to build an object file
+src/HeroRepository.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.o
+.PHONY : src/HeroRepository.cpp.o
+
+src/HeroRepository.i: src/HeroRepository.cpp.i
+.PHONY : src/HeroRepository.i
+
+# target to preprocess a source file
+src/HeroRepository.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.i
+.PHONY : src/HeroRepository.cpp.i
+
+src/HeroRepository.s: src/HeroRepository.cpp.s
+.PHONY : src/HeroRepository.s
+
+# target to generate assembly for a file
+src/HeroRepository.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.s
+.PHONY : src/HeroRepository.cpp.s
+
 src/Hjaelpefunktioner.o: src/Hjaelpefunktioner.cpp.o
 .PHONY : src/Hjaelpefunktioner.o
 
@@ -444,6 +468,9 @@ help:
 	@echo "... src/Hero.o"
 	@echo "... src/Hero.i"
 	@echo "... src/Hero.s"
+	@echo "... src/HeroRepository.o"
+	@echo "... src/HeroRepository.i"
+	@echo "... src/HeroRepository.s"
 	@echo "... src/Hjaelpefunktioner.o"
 	@echo "... src/Hjaelpefunktioner.i"
 	@echo "... src/Hjaelpefunktioner.s"

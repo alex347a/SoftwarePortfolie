@@ -6,6 +6,8 @@
 #include "Grotte.h"
 #include "GrotteGenerator.h"
 #include "VaabenSaelger.h"
+#include "DatabaseManager.h"
+#include "HeroRepository.h"
 
 #include <vector>
 #include <memory>
@@ -21,6 +23,7 @@ public:
 
 protected:
     void visHovedmenu();
+    void vaelgGemtHero();
     void nyHero();
     void loadHero();
     bool eventyrMenu();
@@ -35,7 +38,8 @@ protected:
     bool vaelgOgGennemfoerGrotte();
 
     vector<Fjende> fjendeListe;
-    vector<Hero> predefineredeHelte;
+    vector<Hero> predefineredeHeros;
+    vector<Hero> gemteHeros;
 
     vector<Grotte> grotterne;
     GrotteGenerator *grottegren;
@@ -43,7 +47,14 @@ protected:
     Hero *aktivHero;
 
     void opretFjender();
-    void opretPredefineredeHelte();
+    void opretPredefineredeHeros();
+    void opretGemteHeros();
+
+    void gemAktivHero();
+    void testIndlaesHeros();
+
+    DatabaseManager dbManager;
+    HeroRepository heroRepository;
 };
 
 #endif

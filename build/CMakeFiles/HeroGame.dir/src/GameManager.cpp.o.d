@@ -163,6 +163,9 @@ CMakeFiles/HeroGame.dir/src/GameManager.cpp.o: \
  /home/alex/SoftwarePortfolie/include/GrotteGenerator.h \
  /home/alex/SoftwarePortfolie/include/FjendeFactory.h \
  /home/alex/SoftwarePortfolie/include/VaabenSaelger.h \
+ /home/alex/SoftwarePortfolie/include/DatabaseManager.h \
+ /usr/include/sqlite3.h \
+ /home/alex/SoftwarePortfolie/include/HeroRepository.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \

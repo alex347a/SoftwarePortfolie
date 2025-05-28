@@ -2,11 +2,11 @@
 
 // Constructor til Hero med custom navn
 Hero::Hero(string navn)
-    : Karakter(navn, 10, 10, 2), xp(0), level(1), guld(0), aktivVaaben(nullptr) {}
+    : Karakter(navn, 10, 10, 2), xp(0), level(1), guld(0), aktivVaaben(nullptr), id(0) {}
 
 // Constructor til predefinerede Heros
 Hero::Hero(string navn, int maxHP, int hp, int styrke, int xp, int level, int guld)
-    : Karakter(navn, maxHP, hp, styrke), xp(xp), level(level), guld(guld), aktivVaaben(nullptr) {}
+    : Karakter(navn, maxHP, hp, styrke), xp(xp), level(level), guld(guld), aktivVaaben(nullptr), id(0) {}
 
 int Hero::hentLevel() const
 {
@@ -131,12 +131,12 @@ const Vaaben *Hero::hentUdstyretVaaben() const
     return aktivVaaben;
 }
 
-void Hero::setDatabaseId(int id)
+void Hero::saetDatabaseId(int id)
 {
     this->id = id;
 }
 
-int Hero::getDatabaseId() const
+int Hero::hentDatabaseId() const
 {
     return id;
 }

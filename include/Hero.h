@@ -36,8 +36,8 @@ public:
 
     const Vaaben *hentUdstyretVaaben() const;
 
-    void setDatabaseId(int id); 
-    int getDatabaseId() const;
+    void saetDatabaseId(int id); 
+    int hentDatabaseId() const;
 
 private:
     int xp;
