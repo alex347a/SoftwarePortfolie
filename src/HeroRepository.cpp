@@ -37,7 +37,7 @@ bool HeroRepository::gemHero(const Hero &hero)
         sqlite3_bind_int(stmt, 2, hero.hentMaxHP());                               // maxHP
         sqlite3_bind_int(stmt, 3, hero.hentHP());                                  // hp
         sqlite3_bind_int(stmt, 4, hero.hentStyrke());                              // styrke
-        sqlite3_bind_int(stmt, 5, hero.hentXP());                                  // xp       
+        sqlite3_bind_int(stmt, 5, hero.hentXP());                                  // xp
         sqlite3_bind_int(stmt, 6, hero.hentLevel());                               // level
         sqlite3_bind_int(stmt, 7, hero.hentGuld());                                // guld
     }
@@ -70,14 +70,22 @@ bool HeroRepository::gemHero(const Hero &hero)
 
     sqlite3_finalize(stmt);
 
-    // Vaaben gemmes
-    const Vaaben *vaaben = hero.hentUdstyretVaaben();
-    if (vaaben)
+    // Jeg oplevede at hvis jeg udstyrede et vaaben, så naeste gang jeg loader helten, saa blev alle vaaben duplikeret.
+    // Derfor sletter jeg alle links til vaaben for helten, og genindsaetter dem.
+    string sletLinksSQL = "DELETE FROM HeroVaaben WHERE hero_id = ?";
+    sqlite3_stmt *sletStmt;
+    if (sqlite3_prepare_v2(dbManager.hentDB(), sletLinksSQL.c_str(), -1, &sletStmt, nullptr) == SQLITE_OK)
     {
-        if (!gemHeroVaaben(hero.hentDatabaseId(), *vaaben))
+        sqlite3_bind_int(sletStmt, 1, hero.hentDatabaseId());
+        sqlite3_step(sletStmt);
+        sqlite3_finalize(sletStmt);
+    }
+
+    const vector<Vaaben> &alleVaaben = hero.hentAlleVaaben();
+    for (const Vaaben &v : alleVaaben)
+    {
+        if (!gemHeroVaaben(hero.hentDatabaseId(), v))
         {
-            // Hvis der er fejl ved at gemme vaaben, rulles aendringerne tilbage.
-            cout << "Fejl ved gemning af vaaben for helt: " << hero.hentNavn() << endl;
             dbManager.eksekverSQLData("ROLLBACK");
             return false;
         }
@@ -133,32 +141,31 @@ bool HeroRepository::indlaesHeros(vector<Hero> &heros)
 
 bool HeroRepository::gemHeroVaaben(int heroId, const Vaaben &vaaben)
 {
-    const char *findVaabenSQL = "SELECT id FROM Vaaben WHERE navn = ?";
+    const char *findTypeSQL = "SELECT id FROM VaabenTyper WHERE navn = ?";
     sqlite3_stmt *stmt;
+    int typeId = -1;
 
     // Tjek om vaaben allerede findes
-    if (sqlite3_prepare_v2(dbManager.hentDB(), findVaabenSQL, -1, &stmt, nullptr) != SQLITE_OK)
+    if (sqlite3_prepare_v2(dbManager.hentDB(), findTypeSQL, -1, &stmt, nullptr) != SQLITE_OK)
     {
         cerr << "Fejl ved vaabensoegning: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
         return false;
     }
 
     sqlite3_bind_text(stmt, 1, vaaben.hentNavn().c_str(), -1, SQLITE_TRANSIENT);
-    int vaabenId = -1;
-
     if (sqlite3_step(stmt) == SQLITE_ROW)
     {
-        vaabenId = sqlite3_column_int(stmt, 0);
+        typeId = sqlite3_column_int(stmt, 0);
     }
     sqlite3_finalize(stmt);
 
-    // Hvis nyt vaaben, saa indsaet det
-    if (vaabenId == -1)
+    // Hvis ny type, saa opret den
+    if (typeId == -1)
     {
-        const char *insertVaabenSQL = "INSERT INTO Vaaben (navn, baseStyrke, skaleringsFaktor, maxHoldbarhed) VALUES (?, ?, ?, ?)";
-        if (sqlite3_prepare_v2(dbManager.hentDB(), insertVaabenSQL, -1, &stmt, nullptr) != SQLITE_OK)
+        const char *insertTypeSQL = "INSERT INTO VaabenTyper (navn, baseStyrke, skaleringsFaktor, maxHoldbarhed) VALUES (?, ?, ?, ?)";
+        if (sqlite3_prepare_v2(dbManager.hentDB(), insertTypeSQL, -1, &stmt, nullptr) != SQLITE_OK)
         {
-            cerr << "Fejl ved vaabenindsaettelse: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+            cerr << "Fejl ved oprettelse af vaaben: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
             return false;
         }
 
@@ -169,19 +176,40 @@ bool HeroRepository::gemHeroVaaben(int heroId, const Vaaben &vaaben)
 
         if (sqlite3_step(stmt) != SQLITE_DONE)
         {
+            cerr << "Fejl ved indsaettelse af vaabentype: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
             sqlite3_finalize(stmt);
             return false;
         }
 
-        vaabenId = sqlite3_last_insert_rowid(dbManager.hentDB());
+        typeId = sqlite3_last_insert_rowid(dbManager.hentDB());
         sqlite3_finalize(stmt);
     }
 
     // Link vaaben til helt
-    const char *linkSQL = "INSERT OR REPLACE INTO HeroVaaben (hero_id, vaaben_id, nuvaerendeHoldbarhed) VALUES (?, (SELECT id FROM Vaaben WHERE navn = ?), ?)";
-    if (sqlite3_prepare_v2(dbManager.hentDB(), linkSQL, -1, &stmt, nullptr) != SQLITE_OK)
+    const char *insertVaabenSQL = "INSERT INTO Vaaben (vaaben_type_id, nuvaerendeHoldbarhed) VALUES (?, ?)";
+    if (sqlite3_prepare_v2(dbManager.hentDB(), insertVaabenSQL, -1, &stmt, nullptr) != SQLITE_OK)
     {
         cerr << "Fejl ved vaabenlink: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+        return false;
+    }
+
+    sqlite3_bind_int(stmt, 1, typeId);
+    sqlite3_bind_int(stmt, 2, vaaben.hentNuvaerendeHoldbarhed());
+
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+    {
+        cerr << "Fejl ved indsaettelse af vaaben: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+        sqlite3_finalize(stmt);
+        return false;
+    }
+
+    int vaabenId = sqlite3_last_insert_rowid(dbManager.hentDB());
+    sqlite3_finalize(stmt);
+
+    const char *linkSQL = "INSERT INTO HeroVaaben (hero_id, vaaben_id, nuvaerendeHoldbarhed) VALUES (?, ?, ?)";
+    if (sqlite3_prepare_v2(dbManager.hentDB(), linkSQL, -1, &stmt, nullptr) != SQLITE_OK)
+    {
+        cerr << "Fejl ved linkning af våben: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
         return false;
     }
 
@@ -189,19 +217,26 @@ bool HeroRepository::gemHeroVaaben(int heroId, const Vaaben &vaaben)
     sqlite3_bind_int(stmt, 2, vaabenId);
     sqlite3_bind_int(stmt, 3, vaaben.hentNuvaerendeHoldbarhed());
 
-    bool success = (sqlite3_step(stmt) == SQLITE_DONE);
+    if (sqlite3_step(stmt) != SQLITE_DONE)
+    {
+        cerr << "Fejl ved indsaettelse i HeroVaaben: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+        sqlite3_finalize(stmt);
+        return false;
+    }
+
     sqlite3_finalize(stmt);
-    return success;
+    return true;
 }
 
 vector<Vaaben> HeroRepository::indlaesHeroVaaben(int heroId)
 {
     vector<Vaaben> vaabenListe;
 
-    const char *sql = "SELECT v.navn, v.baseStyrke, v.skaleringsFaktor, "
-                      "v.maxHoldbarhed, hv.nuvaerendeHoldbarhed "
+    const char *sql = "SELECT vt.navn, vt.baseStyrke, vt.skaleringsFaktor, "
+                      "vt.maxHoldbarhed, v.nuvaerendeHoldbarhed "
                       "FROM HeroVaaben hv "
                       "JOIN Vaaben v ON hv.vaaben_id = v.id "
+                      "JOIN VaabenTyper vt ON v.vaaben_type_id = vt.id "
                       "WHERE hv.hero_id = ?";
 
     sqlite3_stmt *stmt;

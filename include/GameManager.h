@@ -51,7 +51,7 @@ protected:
     void opretGemteHeros();
 
     void gemAktivHero();
-    void testIndlaesHeros();
+    void indlaesHeros();
 
     DatabaseManager dbManager;
     HeroRepository heroRepository;

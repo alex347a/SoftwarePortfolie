@@ -37,10 +37,16 @@ GameManager::GameManager() : dbManager("heros.db"), heroRepository(dbManager)
 
     const char *skabVaabenSQL = "CREATE TABLE IF NOT EXISTS Vaaben ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                "navn TEXT NOT NULL, "
-                                "baseStyrke INTEGER NOT NULL, "
-                                "skaleringsFaktor REAL NOT NULL, "
-                                "maxHoldbarhed INTEGER NOT NULL)";
+                                "vaaben_type_id INTEGER NOT NULL, "
+                                "nuvaerendeHoldbarhed INTEGER NOT NULL, "
+                                "FOREIGN KEY(vaaben_type_id) REFERENCES VaabenTyper(id))";
+
+    const char *skabVaabenTyperSQL = "CREATE TABLE IF NOT EXISTS VaabenTyper ("
+                                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                     "navn TEXT NOT NULL UNIQUE, "
+                                     "baseStyrke INTEGER NOT NULL, "
+                                     "skaleringsFaktor REAL NOT NULL, "
+                                     "maxHoldbarhed INTEGER NOT NULL)";
 
     const char *skabHeroVaabenSQL = "CREATE TABLE IF NOT EXISTS HeroVaaben ("
                                     "hero_id INTEGER NOT NULL, "
@@ -51,6 +57,7 @@ GameManager::GameManager() : dbManager("heros.db"), heroRepository(dbManager)
                                     "PRIMARY KEY(hero_id, vaaben_id))";
 
     dbManager.eksekverSQLData(skabVaabenSQL);
+    dbManager.eksekverSQLData(skabVaabenTyperSQL);
     dbManager.eksekverSQLData(skabHeroVaabenSQL);
 
     opretFjender();
@@ -72,7 +79,7 @@ void GameManager::visHovedmenu()
     do
     {
         opretGemteHeros();
-        testIndlaesHeros();
+        indlaesHeros();
         cout << "\n--- HOVEDMENU ---\n";
         if (gemteHeros.size() != 0)
         {
@@ -153,9 +160,12 @@ void GameManager::nyHero()
             }
         }
         // 2. Tjek om navnet allerede findes i de gemte helte
-        if (!eksistererAllerede) {
-            for (const auto& helt : gemteHeros) {
-                if (navn == helt.hentNavn()) {
+        if (!eksistererAllerede)
+        {
+            for (const auto &helt : gemteHeros)
+            {
+                if (navn == helt.hentNavn())
+                {
                     eksistererAllerede = true;
                     break;
                 }
@@ -670,6 +680,11 @@ void GameManager::gemAktivHero()
 {
     if (aktivHero)
     {
+        if (aktivHero->hentUdstyretVaaben() != nullptr)
+        {
+            aktivHero->udrustVaaben(const_cast<Vaaben *>(aktivHero->hentUdstyretVaaben()));
+        }
+
         if (heroRepository.gemHero(*aktivHero))
         {
             cout << "Helt gemt succesfuldt!\n";
@@ -682,7 +697,7 @@ void GameManager::gemAktivHero()
     }
 }
 
-void GameManager::testIndlaesHeros()
+void GameManager::indlaesHeros()
 {
     vector<Hero> heros;
     if (heroRepository.indlaesHeros(heros))
@@ -696,11 +711,6 @@ void GameManager::testIndlaesHeros()
                  << ", XP: " << hero.hentXP()
                  << ", Level " << hero.hentLevel()
                  << " Guld: " << hero.hentGuld() << ")\n";
-
-            if (hero.hentUdstyretVaaben())
-            {
-                cout << "  Vaaben: " << hero.hentUdstyretVaaben()->hentNavn() << endl;
-            }
         }
     }
     else
@@ -712,11 +722,13 @@ void GameManager::testIndlaesHeros()
 GameManager::~GameManager()
 {
     gemAktivHero();
-    if (aktivHero) {
+    if (aktivHero)
+    {
         delete aktivHero;
         aktivHero = nullptr;
     }
-    if (grottegren) {
+    if (grottegren)
+    {
         delete grottegren;
         grottegren = nullptr;
     }

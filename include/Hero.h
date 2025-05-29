@@ -28,6 +28,7 @@ public:
     void givGuld(int guldMaengde);
     void tilfoejVaaben(Vaaben Vaaben);
     void setAktivVaaben(Vaaben *Vaaben);
+    void udrustVaaben(Vaaben *vaaben);
     void visInventar() const;
     void brugAktivVaaben();
 
@@ -35,6 +36,7 @@ public:
     bool udstyrMedVaabenFraIndex(int index);
 
     const Vaaben *hentUdstyretVaaben() const;
+    vector<Vaaben> hentAlleVaaben() const;
 
     void saetDatabaseId(int id); 
     int hentDatabaseId() const;

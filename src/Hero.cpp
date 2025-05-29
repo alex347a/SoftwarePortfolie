@@ -67,6 +67,11 @@ void Hero::setAktivVaaben(Vaaben *vaaben)
     aktivVaaben = vaaben;
 }
 
+void Hero::udrustVaaben(Vaaben *vaaben)
+{
+    aktivVaaben = nullptr;
+}
+
 void Hero::visInventar() const
 {
     if (inventar.empty())
@@ -129,6 +134,11 @@ bool Hero::udstyrMedVaabenFraIndex(int index)
 const Vaaben *Hero::hentUdstyretVaaben() const
 {
     return aktivVaaben;
+}
+
+vector<Vaaben> Hero::hentAlleVaaben() const
+{
+    return inventar;
 }
 
 void Hero::saetDatabaseId(int id)
