@@ -64,3 +64,23 @@ bool Vaaben::erOedelagt() const
 {
     return nuvaerendeHoldbarhed <= 0;
 }
+
+int Vaaben::hentVaabenId() const
+{
+    return vaabenId;
+}
+
+void Vaaben::saetVaabenId(int id)
+{
+    vaabenId = id;
+}
+
+int Vaaben::hentVaabenTypeId() const
+{
+    return vaabenTypeId;
+}
+
+void Vaaben::saetVaabenTypeId(int typeId)
+{
+    vaabenTypeId = typeId;
+}

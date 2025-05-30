@@ -8,7 +8,6 @@ DatabaseManager::DatabaseManager(const string &dbSti)
     {
         cerr << "Kan ikke aabne database: " << sqlite3_errmsg(db) << endl;
     }
-    cout << "Database aabnet: " << dbSti << endl;
 }
 
 // SQL forespoergslerne er til CREATE, INSERT, UPDATE og DELETE, som ikke returnerer noget

@@ -8,6 +8,9 @@
 #include "VaabenSaelger.h"
 #include "DatabaseManager.h"
 #include "HeroRepository.h"
+#include "Hjaelpefunktioner.h"
+#include "StandardFjendeFactory.h"
+#include "Analyse.h"
 
 #include <vector>
 #include <memory>
@@ -55,6 +58,9 @@ protected:
 
     DatabaseManager dbManager;
     HeroRepository heroRepository;
+
+    void visAnalyseMenu();
+    Analyse analyse;
 };
 
 #endif

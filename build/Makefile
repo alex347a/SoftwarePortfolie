@@ -129,6 +129,30 @@ HeroGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/build
 .PHONY : HeroGame/fast
 
+src/Analyse.o: src/Analyse.cpp.o
+.PHONY : src/Analyse.o
+
+# target to build an object file
+src/Analyse.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Analyse.cpp.o
+.PHONY : src/Analyse.cpp.o
+
+src/Analyse.i: src/Analyse.cpp.i
+.PHONY : src/Analyse.i
+
+# target to preprocess a source file
+src/Analyse.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Analyse.cpp.i
+.PHONY : src/Analyse.cpp.i
+
+src/Analyse.s: src/Analyse.cpp.s
+.PHONY : src/Analyse.s
+
+# target to generate assembly for a file
+src/Analyse.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Analyse.cpp.s
+.PHONY : src/Analyse.cpp.s
+
 src/DatabaseManager.o: src/DatabaseManager.cpp.o
 .PHONY : src/DatabaseManager.o
 
@@ -450,6 +474,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HeroGame"
+	@echo "... src/Analyse.o"
+	@echo "... src/Analyse.i"
+	@echo "... src/Analyse.s"
 	@echo "... src/DatabaseManager.o"
 	@echo "... src/DatabaseManager.i"
 	@echo "... src/DatabaseManager.s"

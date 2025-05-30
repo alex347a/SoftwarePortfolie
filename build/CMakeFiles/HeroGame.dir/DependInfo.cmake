@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/alex/SoftwarePortfolie/src/Analyse.cpp" "CMakeFiles/HeroGame.dir/src/Analyse.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Analyse.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/DatabaseManager.cpp" "CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/DatabaseManager.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Fjende.cpp" "CMakeFiles/HeroGame.dir/src/Fjende.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Fjende.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/GameManager.cpp" "CMakeFiles/HeroGame.dir/src/GameManager.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/GameManager.cpp.o.d"

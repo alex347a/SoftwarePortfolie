@@ -23,12 +23,19 @@ public:
     void brug();
     bool erOedelagt() const;
 
+    int hentVaabenId() const;
+    int hentVaabenTypeId() const;
+    void saetVaabenId(int id);
+    void saetVaabenTypeId(int typeId);
+
 private:
     string navn;
     int baseStyrke;
     int skaleringsFaktor;
     int maxHoldbarhed;
     int nuvaerendeHoldbarhed;
+    int vaabenId;
+    int vaabenTypeId;
 };
 
 #endif

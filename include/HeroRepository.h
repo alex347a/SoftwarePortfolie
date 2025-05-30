@@ -15,7 +15,7 @@ public:
 
     bool gemHero(const Hero &hero);
     bool indlaesHeros(vector<Hero> &heros);
-    bool gemHeroVaaben(int heroId, const Vaaben& vaaben);
+    bool gemHeroVaaben(int heroId, Vaaben& vaaben);
     vector<Vaaben> indlaesHeroVaaben(int heroId);
 
 private:

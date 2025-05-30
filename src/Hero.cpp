@@ -102,6 +102,7 @@ void Hero::brugAktivVaaben()
     if (aktivVaaben->erOedelagt())
     {
         cout << aktivVaaben->hentNavn() << " er oedelagt!\n";
+        aktivVaaben->hentNavn() = aktivVaaben->hentNavn() + " (OEDELAGT)";
         aktivVaaben = nullptr;
     }
 }
@@ -127,6 +128,12 @@ bool Hero::udstyrMedVaabenFraIndex(int index)
         cout << "Ikke et validt vaabenindeks!\n";
         return false;
     }
+
+    if (inventar[index].erOedelagt())
+    {
+        cout << "Vaabenet er oedelagt og kan ikke udstyres!\n";
+        return false;
+    }
     aktivVaaben = &inventar[index];
     return true;
 }
@@ -149,4 +156,14 @@ void Hero::saetDatabaseId(int id)
 int Hero::hentDatabaseId() const
 {
     return id;
+}
+
+void Hero::foroegAntalBesejredeFjender()
+{
+    antalBesejredeFjender++;
+}
+
+int Hero::hentAntalBesejredeFjender() const
+{
+    return antalBesejredeFjender;
 }

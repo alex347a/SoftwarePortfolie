@@ -3,6 +3,7 @@
 
 #include "Vaaben.h"
 #include "Hero.h"
+#include "DatabaseManager.h"
 
 #include <vector>
 
@@ -11,7 +12,7 @@ using namespace std;
 class VaabenSaelger
 {
 public:
-    VaabenSaelger(const string &saelgerNavn);
+    VaabenSaelger(const string &saelgerNavn, DatabaseManager &dbManager);
 
     int hentAntalVaaben() const;
     void fyldLager(int level);
@@ -23,6 +24,7 @@ public:
 private:
     vector<Vaaben> vaabenLager;
     string saelgerNavn;
+    DatabaseManager &dbManager;
 };
 
 #endif

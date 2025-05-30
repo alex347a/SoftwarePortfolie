@@ -1,6 +1,6 @@
 #include "VaabenSaelger.h"
 
-VaabenSaelger::VaabenSaelger(const string &saelgerNavn) : saelgerNavn(saelgerNavn)
+VaabenSaelger::VaabenSaelger(const string &saelgerNavn, DatabaseManager &dbManager) : saelgerNavn(saelgerNavn), dbManager(dbManager)
 {
     fyldLager(1);
 }
@@ -47,9 +47,53 @@ bool VaabenSaelger::saelgVaaben(int index, Hero &koeber)
 
     if (koeber.hentGuld() >= pris)
     {
-        koeber.tilfoejVaaben(vaabenLager[index]);
+        const Vaaben &v = vaabenLager[index];
+
+        // Find vaaben_type_id i databasen (eller opret hvis den ikke findes i forvejen)
+        int typeId = -1;
+        sqlite3_stmt *stmt;
+        const char *findTypeSQL = "SELECT id FROM VaabenTyper WHERE navn = ?";
+        if (sqlite3_prepare_v2(dbManager.hentDB(), findTypeSQL, -1, &stmt, nullptr) == SQLITE_OK)
+        {
+            sqlite3_bind_text(stmt, 1, v.hentNavn().c_str(), -1, SQLITE_TRANSIENT);
+            if (sqlite3_step(stmt) == SQLITE_ROW)
+                typeId = sqlite3_column_int(stmt, 0);
+            sqlite3_finalize(stmt);
+        }
+        // Hvis ikke fundet, opret ny type
+        if (typeId == -1)
+        {
+            const char *insertTypeSQL = "INSERT INTO VaabenTyper (navn, baseStyrke, skaleringsFaktor, maxHoldbarhed) VALUES (?, ?, ?, ?)";
+            if (sqlite3_prepare_v2(dbManager.hentDB(), insertTypeSQL, -1, &stmt, nullptr) == SQLITE_OK)
+            {
+                sqlite3_bind_text(stmt, 1, v.hentNavn().c_str(), -1, SQLITE_TRANSIENT);
+                sqlite3_bind_int(stmt, 2, v.hentBaseStyrke());
+                sqlite3_bind_double(stmt, 3, v.hentSkaleringsFaktor());
+                sqlite3_bind_int(stmt, 4, v.hentMaxHoldbarhed());
+                sqlite3_step(stmt);
+                sqlite3_finalize(stmt);
+            }
+            typeId = sqlite3_last_insert_rowid(dbManager.hentDB());
+        }
+
+        // Indsaet vaaben med korrekt typeId
+        string sql = "INSERT INTO Vaaben (vaaben_type_id, nuvaerendeHoldbarhed) VALUES (?, ?)";
+        if (sqlite3_prepare_v2(dbManager.hentDB(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
+        {
+            sqlite3_bind_int(stmt, 1, typeId);
+            sqlite3_bind_int(stmt, 2, v.hentNuvaerendeHoldbarhed());
+            sqlite3_step(stmt);
+            sqlite3_finalize(stmt);
+        }
+        int vaabenId = sqlite3_last_insert_rowid(dbManager.hentDB());
+
+        Vaaben vaabenKopi = v;
+        vaabenKopi.saetVaabenId(vaabenId);
+        vaabenKopi.saetVaabenTypeId(typeId);
+
+        koeber.tilfoejVaaben(vaabenKopi);
         koeber.givGuld(-pris);
-        cout << "Koebet gennemført: " << vaabenLager[index].hentNavn() << " for " << pris << " guld\n";
+        cout << "Koebet gennemfoert: " << vaabenLager[index].hentNavn() << " for " << pris << " guld\n";
         return true;
     }
 

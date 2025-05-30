@@ -1,6 +1,4 @@
 #include "GameManager.h"
-#include "StandardFjendeFactory.h"
-#include "Hjaelpefunktioner.h"
 
 #include <iostream>
 #include <string>
@@ -8,10 +6,8 @@
 
 using namespace std;
 
-GameManager::GameManager() : dbManager("heros.db"), heroRepository(dbManager)
+GameManager::GameManager() : dbManager("heros.db"), heroRepository(dbManager), analyse(dbManager)
 {
-    cout << "Initialiserer database...\n";
-
     const char *skabTabelSQL = "CREATE TABLE IF NOT EXISTS Hero ("
                                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                "navn TEXT NOT NULL, "
@@ -60,6 +56,25 @@ GameManager::GameManager() : dbManager("heros.db"), heroRepository(dbManager)
     dbManager.eksekverSQLData(skabVaabenTyperSQL);
     dbManager.eksekverSQLData(skabHeroVaabenSQL);
 
+    const char *skabAnalyseSQL = "CREATE TABLE IF NOT EXISTS Analyse ("
+                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                 "hero_id INTEGER NOT NULL, "
+                                 "vaaben_id INTEGER, "
+                                 "FOREIGN KEY(hero_id) REFERENCES Hero(id), "
+                                 "FOREIGN KEY(vaaben_id) REFERENCES Vaaben(id))";
+    dbManager.eksekverSQLData(skabAnalyseSQL);
+
+    // Til intro, hvis man ikke har nogle gemte helte
+    vector<Hero> heros;
+    if (heros.empty()) {
+        cout << "Velkommen til eventyret!\n"
+             << "Dit maal er at besejre de onde engelske fjender.\n"
+             << "Dette vil goere dig staerkere med erfaring og guld.\n"
+             << "I sidste ende kan du besejre den onde engelske drage og redde landet!\n"
+             << "Hvis du gaar ud af spillet, vil din helt blive gemt,\n"
+             << "MEN HUSK AT GENUDSTYRE DIN HELT MED ET VAABEN!" << endl;
+    }
+
     opretFjender();
     opretPredefineredeHeros();
 
@@ -79,7 +94,6 @@ void GameManager::visHovedmenu()
     do
     {
         opretGemteHeros();
-        indlaesHeros();
         cout << "\n--- HOVEDMENU ---\n";
         if (gemteHeros.size() != 0)
         {
@@ -87,10 +101,11 @@ void GameManager::visHovedmenu()
         }
         cout << "1. Opret ny helt\n";
         cout << "2. Vaelg en predefineret helt\n";
-        cout << "3. Afslut\n";
+        cout << "3. Vis statistik\n";
+        cout << "4. Afslut\n";
         cout << "Valg: ";
 
-        valg = Hjaelpefunktioner::hentGyldigtTal(0, 3);
+        valg = Hjaelpefunktioner::hentGyldigtTal(0, 4);
 
         switch (valg)
         {
@@ -107,13 +122,16 @@ void GameManager::visHovedmenu()
             eventyrMenu();
             break;
         case 3:
+            visAnalyseMenu();
+            break;
+        case 4:
             cout << "Spillet afsluttes...\n";
             break;
         default:
             cout << "Ugyldigt valg. Proev igen.\n";
         }
 
-    } while (valg != 3);
+    } while (valg != 4);
 }
 
 void GameManager::vaelgGemtHero()
@@ -183,6 +201,7 @@ void GameManager::nyHero()
     }
 
     aktivHero = new Hero(navn);
+    heroRepository.gemHero(*aktivHero);
     cout << "Ny helt oprettet: " << aktivHero->hentNavn() << endl;
 }
 
@@ -202,7 +221,35 @@ void GameManager::loadHero()
     cout << "Valg: ";
     int valg = Hjaelpefunktioner::hentGyldigtTal(1, predefineredeHeros.size());
 
-    aktivHero = new Hero(predefineredeHeros[valg - 1]);
+    Hero valgtHero = predefineredeHeros[valg - 1];
+
+    // Tjek om helten findes i databasen
+    vector<Hero> alleHeros;
+    heroRepository.indlaesHeros(alleHeros);
+    bool fundet = false;
+    for (const auto& h : alleHeros) {
+        if (h.hentNavn() == valgtHero.hentNavn()) {
+            // Brug den eksisterende helt fra databasen
+            valgtHero = h;
+            cout << "Helt med samme navn findes allerede i databasen. Bruger den eksisterende.\n";
+            fundet = true;
+            break;
+        }
+    }
+    if (!fundet) {
+        // Kun hvis helten ikke findes, indsaet i databasen
+        heroRepository.gemHero(valgtHero);
+        vector<Hero> opdateretHeros;
+        heroRepository.indlaesHeros(opdateretHeros);
+        for (const auto& h : opdateretHeros) {
+            if (h.hentNavn() == valgtHero.hentNavn()) {
+                valgtHero = h;
+                break;
+            }
+        }
+    }
+
+    aktivHero = new Hero(valgtHero);
     cout << "Helt valgt: " << aktivHero->hentNavn() << endl;
 }
 
@@ -334,7 +381,7 @@ void GameManager::kaempModFjende()
 
         if (fjende.hentNavn() == "Dragon" && !fjende.erILive())
         {
-            cout << "Du besejrede dragen! Du har vundet spillet!\n";
+            cout << aktivHero->hentNavn() << "besejrede den onde engelske drage! Du har vundet spillet!\n";
             cout << "Tillykke, " << aktivHero->hentNavn() << "!\n";
             cout << "Forlader spillet...\n";
             exit(0);
@@ -342,6 +389,26 @@ void GameManager::kaempModFjende()
 
         if (!fjende.erILive())
         {
+            int heroId = aktivHero->hentDatabaseId();
+            const Vaaben *vaaben = aktivHero->hentUdstyretVaaben();
+            int vaabenId = vaaben ? vaaben->hentVaabenId() : 0;
+
+            string sql = "INSERT INTO Analyse (hero_id, vaaben_id) VALUES (?, ?)";
+            sqlite3_stmt *stmt;
+            if (sqlite3_prepare_v2(dbManager.hentDB(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
+            {
+                sqlite3_bind_int(stmt, 1, heroId);
+                if (vaabenId > 0)
+                    sqlite3_bind_int(stmt, 2, vaabenId);
+                else
+                    sqlite3_bind_null(stmt, 2);
+                sqlite3_step(stmt);
+                sqlite3_finalize(stmt);
+            }
+            if (sqlite3_prepare_v2(dbManager.hentDB(), sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK)
+            {
+                cerr << "Fejl: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+            }
             break;
         }
 
@@ -376,16 +443,17 @@ void GameManager::kaempModFjende()
         while (aktivHero->levelOp())
         {
             aktivHero->givFuldHP();
-            cout << "Du er steget i level!\n";
+            cout << aktivHero->hentNavn() << " er steget i level!\n";
             cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
             cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
             cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
         }
-        cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
+        cout << aktivHero->hentNavn() << " har nu " << aktivHero->hentXP() << " XP.\n";
     }
     else
     {
         cout << aktivHero->hentNavn() << " doede i kampen...\n";
+        cout << "Din helt gaar tilbage til sidste gemte tilstand.\n";
     }
 }
 
@@ -447,6 +515,26 @@ void GameManager::kaempModFjendeIGrotte(const Fjende &fjende)
 
         if (!kopi.erILive())
         {
+            int heroId = aktivHero->hentDatabaseId();
+            const Vaaben *vaaben = aktivHero->hentUdstyretVaaben();
+            int vaabenId = vaaben ? vaaben->hentVaabenId() : 0;
+
+            string sql = "INSERT INTO Analyse (hero_id, vaaben_id) VALUES (?, ?)";
+            sqlite3_stmt *stmt;
+            if (sqlite3_prepare_v2(dbManager.hentDB(), sql.c_str(), -1, &stmt, nullptr) == SQLITE_OK)
+            {
+                sqlite3_bind_int(stmt, 1, heroId);
+                if (vaabenId > 0)
+                    sqlite3_bind_int(stmt, 2, vaabenId);
+                else
+                    sqlite3_bind_null(stmt, 2);
+                sqlite3_step(stmt);
+                sqlite3_finalize(stmt);
+            }
+            if (sqlite3_prepare_v2(dbManager.hentDB(), sql.c_str(), -1, &stmt, nullptr) != SQLITE_OK)
+            {
+                cerr << "Fejl: " << sqlite3_errmsg(dbManager.hentDB()) << endl;
+            }
             break;
         }
 
@@ -481,16 +569,17 @@ void GameManager::kaempModFjendeIGrotte(const Fjende &fjende)
         if (aktivHero->levelOp())
         {
             aktivHero->givFuldHP();
-            cout << "Du er steget i level!\n";
+            cout << aktivHero->hentNavn() << " er steget i level!\n";
             cout << "Nyt level: " << aktivHero->hentLevel() << "\n";
             cout << "Nyt max HP: " << aktivHero->hentMaxHP() << "\n";
             cout << "Nyt styrke: " << aktivHero->hentStyrke() << "\n";
         }
-        cout << "Du har nu " << aktivHero->hentXP() << " XP.\n";
+        cout << aktivHero->hentNavn() << " har nu " << aktivHero->hentXP() << " XP.\n";
     }
     else
     {
         cout << aktivHero->hentNavn() << " doede i kampen...\n";
+        cout << "Din helt gaar tilbage til sidste gemte tilstand.\n";
     }
 }
 
@@ -552,18 +641,18 @@ bool GameManager::vaelgOgGennemfoerGrotte()
 
     for (Fjende fjende : valgt.hentFjender())
     {
-        cout << "Du moeder: " << fjende.hentNavn() << "\n";
+        cout << aktivHero->hentNavn() << " moeder: " << fjende.hentNavn() << "\n";
         kaempModFjendeIGrotte(fjende);
         if (!aktivHero->erILive())
         {
-            cout << "Du er doed og kan ikke fortsaette eventyret.\n";
+            cout << aktivHero->hentNavn() << " er doed og kan ikke fortsaette eventyret.\n";
             return true;
         }
     }
 
     aktivHero->givGuld(valgt.hentGuld());
-    cout << "Du har gennemfoert " << valgt.hentNavn() << " og faar " << valgt.hentGuld() << " guld!\n";
-    cout << "Du har nu " << aktivHero->hentGuld() << " guld.\n";
+    cout << aktivHero->hentNavn() << " har gennemfoert " << valgt.hentNavn() << " og faar " << valgt.hentGuld() << " guld!\n";
+    cout << aktivHero->hentNavn() << " har nu " << aktivHero->hentGuld() << " guld.\n";
 
     // Rydder alle grotter saadan at der dannes nye grotter naeste gang
     grotterne.clear();
@@ -600,12 +689,8 @@ void GameManager::visInventarMenu()
 
             if (aktivHero->udstyrMedVaabenFraIndex(valgAfVaaben - 1))
             {
-                cout << "Du har nu udstyret "
+                cout << aktivHero->hentNavn() << " har nu udstyret "
                      << aktivHero->hentUdstyretVaaben()->hentNavn() << "!\n";
-            }
-            else
-            {
-                cout << "Kunne ikke udstyre vaaben!\n";
             }
         }
     } while (valg != 2);
@@ -619,14 +704,14 @@ void GameManager::visVaabenSaelgerMenu()
         return;
     }
 
-    static VaabenSaelger vaabenSaelger("Jeff");
+    static VaabenSaelger vaabenSaelger("Jeff", dbManager);
     vaabenSaelger.fyldLager(aktivHero->hentLevel());
 
     int valg;
     do
     {
         cout << "\n--- VAABENHANDLER MENU ---\n";
-        cout << "Du har " << aktivHero->hentGuld() << " guld." << "\n\n";
+        cout << aktivHero->hentNavn() << " har " << aktivHero->hentGuld() << " guld." << "\n\n";
 
         // Vis vaabenudvalg med spillerns specifikke skadevaerdier
         vaabenSaelger.visLager(*aktivHero);
@@ -668,7 +753,6 @@ void GameManager::opretGemteHeros()
     if (heroRepository.indlaesHeros(heros))
     {
         gemteHeros = heros;
-        cout << "Antal gemte helte: " << gemteHeros.size() << endl;
     }
     else
     {
@@ -702,7 +786,6 @@ void GameManager::indlaesHeros()
     vector<Hero> heros;
     if (heroRepository.indlaesHeros(heros))
     {
-        cout << "Antal indlaeste heros: " << heros.size() << endl;
         for (const auto &hero : heros)
         {
             cout << "Navn: " << hero.hentNavn()
@@ -717,6 +800,52 @@ void GameManager::indlaesHeros()
     {
         cout << "Du har ikke tidligere gemt nogle helte!\n";
     }
+}
+
+void GameManager::visAnalyseMenu()
+{
+    cout << "--- Statistik ---\n";
+    auto navne = analyse.hentSorteredeHelteNavne();
+    cout << "Alle helte (alfabetisk):\n";
+    for (size_t i = 0; i < navne.size(); ++i)
+        cout << "  " << (i + 1) << ". " << navne[i] << "\n";
+
+    cout << "\nVaelg en helt for detaljeret statistik (0 for at gaa tilbage, eller 1-" << navne.size() << "): ";
+    int valg = Hjaelpefunktioner::hentGyldigtTal(0, navne.size());
+
+    if (valg == 0) {
+        cout << "Tilbage til hovedmenu...\n";
+        return;
+    }
+
+    // Find heroId for valgt navn
+    int heroId = -1;
+    string heroNavn;
+    vector<Hero> alleHeros;
+    heroRepository.indlaesHeros(alleHeros);
+    for (const auto& h : alleHeros) {
+        if (h.hentNavn() == navne[valg - 1]) {
+            heroId = h.hentDatabaseId();
+            heroNavn = h.hentNavn();
+            break;
+        }
+    }
+
+    if (heroId != -1) {
+        cout << "\n" << heroNavn << " har besejret "
+             << analyse.antalFjenderBesejretAfHero(heroId) << " fjender.\n";
+        auto vaabenStats = analyse.fjenderBesejretPerVaabenForHero(heroId);
+        cout << "Fjender besejret per vaaben:\n";
+        for (const auto &[vaaben, antal] : vaabenStats)
+            cout << "  " << vaaben << ": " << antal << "\n";
+    } else {
+        cout << "\nIngen statistik for valgt helt.\n";
+    }
+
+    auto mestDrabelige = analyse.mestDrabeligeHeroPerVaaben();
+    cout << "\nMest drabelige helt per vaaben:\n";
+    for (const auto &[vaaben, helt] : mestDrabelige)
+        cout << "  " << vaaben << ": " << helt << "\n";
 }
 
 GameManager::~GameManager()

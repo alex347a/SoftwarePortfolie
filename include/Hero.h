@@ -41,6 +41,9 @@ public:
     void saetDatabaseId(int id); 
     int hentDatabaseId() const;
 
+    void foroegAntalBesejredeFjender();
+    int hentAntalBesejredeFjender() const;
+
 private:
     int xp;
     int level;
@@ -49,6 +52,8 @@ private:
 
     vector<Vaaben> inventar;
     Vaaben *aktivVaaben;
+
+    int antalBesejredeFjender;
 };
 
 #endif
