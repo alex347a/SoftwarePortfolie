@@ -28,6 +28,9 @@ void VaabenSaelger::fyldLager(int level)
     vaabenLager.push_back(Vaaben("Jernsvaerd", 5, 1, 20));
     vaabenLager.push_back(Vaaben("Hammer", 3, 2, 30));
     vaabenLager.push_back(Vaaben("Staaloekse", 8, 3, 15));
+    vaabenLager.push_back(Vaaben("Morgenstjerne", 10, 1, 10));
+    vaabenLager.push_back(Vaaben("Magisk Stav", 10, 4, 25));
+    vaabenLager.push_back(Vaaben("Lynsvaerd", 12, 5, 40));
 }
 
 int VaabenSaelger::beregnPris(const Vaaben &vaaben, int heroStyrke) const
