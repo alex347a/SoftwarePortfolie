@@ -11,6 +11,7 @@
 #include "Hjaelpefunktioner.h"
 #include "StandardFjendeFactory.h"
 #include "Analyse.h"
+#include "KampManager.h"
 
 #include <vector>
 #include <memory>

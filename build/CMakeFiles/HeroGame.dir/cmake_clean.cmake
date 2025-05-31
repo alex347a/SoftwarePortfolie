@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.o"
   "CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.o.d"
+  "CMakeFiles/HeroGame.dir/src/KampManager.cpp.o"
+  "CMakeFiles/HeroGame.dir/src/KampManager.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o"
   "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d"
   "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o"

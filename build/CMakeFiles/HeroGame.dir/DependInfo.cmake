@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alex/SoftwarePortfolie/src/Hero.cpp" "CMakeFiles/HeroGame.dir/src/Hero.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Hero.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/HeroRepository.cpp" "CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/HeroRepository.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Hjaelpefunktioner.cpp" "CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.o.d"
+  "/home/alex/SoftwarePortfolie/src/KampManager.cpp" "CMakeFiles/HeroGame.dir/src/KampManager.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/KampManager.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Karakter.cpp" "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Karakter.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/StandardFjendeFactory.cpp" "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/StandardFjendeFactory.cpp.o.d"
   "/home/alex/SoftwarePortfolie/src/Vaaben.cpp" "CMakeFiles/HeroGame.dir/src/Vaaben.cpp.o" "gcc" "CMakeFiles/HeroGame.dir/src/Vaaben.cpp.o.d"

@@ -1,6 +1,7 @@
-CMakeFiles/HeroGame.dir/src/main.cpp.o: \
- /home/alex/SoftwarePortfolie/src/main.cpp /usr/include/stdc-predef.h \
- /home/alex/SoftwarePortfolie/include/GameManager.h \
+CMakeFiles/HeroGame.dir/src/KampManager.cpp.o: \
+ /home/alex/SoftwarePortfolie/src/KampManager.cpp \
+ /usr/include/stdc-predef.h \
+ /home/alex/SoftwarePortfolie/include/KampManager.h \
  /home/alex/SoftwarePortfolie/include/Hero.h \
  /home/alex/SoftwarePortfolie/include/Karakter.h \
  /usr/include/c++/11/string \
@@ -158,17 +159,9 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
  /home/alex/SoftwarePortfolie/include/Fjende.h \
- /home/alex/SoftwarePortfolie/include/Grotte.h \
- /home/alex/SoftwarePortfolie/include/GrotteGenerator.h \
- /home/alex/SoftwarePortfolie/include/FjendeFactory.h \
- /home/alex/SoftwarePortfolie/include/VaabenSaelger.h \
+ /home/alex/SoftwarePortfolie/include/Analyse.h \
  /home/alex/SoftwarePortfolie/include/DatabaseManager.h \
- /usr/include/sqlite3.h \
- /home/alex/SoftwarePortfolie/include/HeroRepository.h \
- /home/alex/SoftwarePortfolie/include/Hjaelpefunktioner.h \
- /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /home/alex/SoftwarePortfolie/include/StandardFjendeFactory.h \
- /home/alex/SoftwarePortfolie/include/Analyse.h /usr/include/c++/11/map \
+ /usr/include/sqlite3.h /usr/include/c++/11/map \
  /usr/include/c++/11/bits/stl_tree.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/node_handle.h \
@@ -177,19 +170,4 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: \
  /usr/include/c++/11/array /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h \
  /usr/include/c++/11/bits/stl_multimap.h \
- /usr/include/c++/11/bits/erase_if.h \
- /home/alex/SoftwarePortfolie/include/KampManager.h \
- /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_tempbuf.h \
- /usr/include/c++/11/bits/stl_raw_storage_iter.h \
- /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
- /usr/include/c++/11/bits/unique_ptr.h \
- /usr/include/c++/11/bits/shared_ptr.h \
- /usr/include/c++/11/bits/shared_ptr_base.h \
- /usr/include/c++/11/bits/allocated_ptr.h \
- /usr/include/c++/11/bits/refwrap.h /usr/include/c++/11/ext/concurrence.h \
- /usr/include/c++/11/bits/shared_ptr_atomic.h \
- /usr/include/c++/11/bits/atomic_base.h \
- /usr/include/c++/11/bits/atomic_lockfree_defines.h \
- /usr/include/c++/11/backward/auto_ptr.h \
- /usr/include/c++/11/pstl/glue_memory_defs.h \
- /usr/include/c++/11/pstl/execution_defs.h
+ /usr/include/c++/11/bits/erase_if.h

@@ -731,6 +731,7 @@ CMakeFiles/HeroGame.dir/src/GameManager.cpp.o: ../src/GameManager.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/stl_multimap.h \
   /usr/include/c++/11/bits/erase_if.h \
+  ../include/KampManager.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_tempbuf.h \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2510,6 +2511,7 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/stl_multimap.h \
   /usr/include/c++/11/bits/erase_if.h \
+  ../include/KampManager.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_tempbuf.h \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -2544,6 +2546,8 @@ CMakeFiles/HeroGame.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/stl_raw_storage_iter.h:
 
 /usr/include/c++/11/memory:
+
+../include/KampManager.h:
 
 /usr/include/c++/11/sstream:
 

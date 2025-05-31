@@ -178,8 +178,9 @@ CMakeFiles/HeroGame.dir/src/GameManager.cpp.o: \
  /usr/include/c++/11/array /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h \
  /usr/include/c++/11/bits/stl_multimap.h \
- /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/memory \
- /usr/include/c++/11/bits/stl_tempbuf.h \
+ /usr/include/c++/11/bits/erase_if.h \
+ /home/alex/SoftwarePortfolie/include/KampManager.h \
+ /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
  /usr/include/c++/11/bits/unique_ptr.h \

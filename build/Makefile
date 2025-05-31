@@ -345,6 +345,30 @@ src/Hjaelpefunktioner.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/Hjaelpefunktioner.cpp.s
 .PHONY : src/Hjaelpefunktioner.cpp.s
 
+src/KampManager.o: src/KampManager.cpp.o
+.PHONY : src/KampManager.o
+
+# target to build an object file
+src/KampManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/KampManager.cpp.o
+.PHONY : src/KampManager.cpp.o
+
+src/KampManager.i: src/KampManager.cpp.i
+.PHONY : src/KampManager.i
+
+# target to preprocess a source file
+src/KampManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/KampManager.cpp.i
+.PHONY : src/KampManager.cpp.i
+
+src/KampManager.s: src/KampManager.cpp.s
+.PHONY : src/KampManager.s
+
+# target to generate assembly for a file
+src/KampManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HeroGame.dir/build.make CMakeFiles/HeroGame.dir/src/KampManager.cpp.s
+.PHONY : src/KampManager.cpp.s
+
 src/Karakter.o: src/Karakter.cpp.o
 .PHONY : src/Karakter.o
 
@@ -501,6 +525,9 @@ help:
 	@echo "... src/Hjaelpefunktioner.o"
 	@echo "... src/Hjaelpefunktioner.i"
 	@echo "... src/Hjaelpefunktioner.s"
+	@echo "... src/KampManager.o"
+	@echo "... src/KampManager.i"
+	@echo "... src/KampManager.s"
 	@echo "... src/Karakter.o"
 	@echo "... src/Karakter.i"
 	@echo "... src/Karakter.s"
