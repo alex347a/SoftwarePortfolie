@@ -1,0 +1,57 @@
+-- Database setup script for Hero RPG system
+-- Tabeller oprettes kun hvis de ikke allerede eksisterer
+
+-- Hoved Hero tabel
+CREATE TABLE IF NOT EXISTS Hero (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    navn TEXT NOT NULL,
+    maxHP INTEGER NOT NULL,
+    hp INTEGER NOT NULL,
+    styrke INTEGER NOT NULL,
+    xp INTEGER NOT NULL,
+    level INTEGER NOT NULL,
+    guld INTEGER NOT NULL
+);
+
+-- Tjek om Hero tabellen er oprettet korrekt
+SELECT 1 FROM Hero LIMIT 1;
+
+-- Individuelle våbeninstanser
+CREATE TABLE IF NOT EXISTS Vaaben (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    vaaben_type_id INTEGER NOT NULL,
+    nuvaerendeHoldbarhed INTEGER NOT NULL,
+    FOREIGN KEY(vaaben_type_id) REFERENCES VaabenTyper(id)
+);
+
+-- Våbentyper (template for våben)
+CREATE TABLE IF NOT EXISTS VaabenTyper (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    navn TEXT NOT NULL UNIQUE,
+    baseStyrke INTEGER NOT NULL,
+    skaleringsFaktor REAL NOT NULL,
+    maxHoldbarhed INTEGER NOT NULL
+);
+
+
+-- Mellemtabel for hero-våben relationer
+CREATE TABLE IF NOT EXISTS HeroVaaben (
+    hero_id INTEGER NOT NULL,
+    vaaben_id INTEGER NOT NULL,
+    nuvaerendeHoldbarhed INTEGER NOT NULL,
+    FOREIGN KEY(hero_id) REFERENCES Hero(id) ON DELETE CASCADE,
+    FOREIGN KEY(vaaben_id) REFERENCES Vaaben(id) ON DELETE CASCADE,
+    PRIMARY KEY(hero_id, vaaben_id)
+);
+
+-- Analyse/statistik tabel
+CREATE TABLE IF NOT EXISTS Analyse (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hero_id INTEGER NOT NULL,
+    vaaben_id INTEGER,
+    FOREIGN KEY(hero_id) REFERENCES Hero(id),
+    FOREIGN KEY(vaaben_id) REFERENCES Vaaben(id)
+);
+
+-- Tjek alle tabeller
+SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
